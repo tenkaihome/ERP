@@ -1,11 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Send, CheckCircle2, Loader2, Sparkles, Building, Phone, Mail, User } from "lucide-react";
-import { INDUSTRIES, PRICING_TIERS } from "../common/constants";
+import { getIndustries, getPricingTiers } from "../common/constants";
+import { useLanguage } from "@/components/LanguageProvider";
+import { TRANSLATIONS } from "@/common/translations";
 import CustomSelect from "./ui/CustomSelect";
 
 export default function ContactForm() {
+  const { language } = useLanguage();
+  const t = TRANSLATIONS[language];
+
+  const pricingTiers = useMemo(() => getPricingTiers(language), [language]);
+  const industries = useMemo(() => getIndustries(language), [language]);
+
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -54,10 +62,10 @@ export default function ContactForm() {
       if (response.ok) {
         setSubmitted(true);
       } else {
-        setError(result.message || "Đã xảy ra lỗi. Vui lòng thử lại sau.");
+        setError(result.message || (language === "vi" ? "Đã xảy ra lỗi. Vui lòng thử lại sau." : "An error occurred. Please try again later."));
       }
     } catch (err) {
-      setError("Không thể kết nối đến máy chủ. Vui lòng kiểm tra lại mạng.");
+      setError(language === "vi" ? "Không thể kết nối đến máy chủ. Vui lòng kiểm tra lại mạng." : "Could not connect to the server. Please check your network.");
     } finally {
       setLoading(false);
     }
@@ -80,10 +88,18 @@ export default function ContactForm() {
               </div>
               <div className="space-y-2.5">
                 <h3 className="text-2xl font-extrabold text-zinc-900 dark:text-white">
-                  Đăng Ký Tư Vấn Thành Công!
+                  {t.contactSuccessTitle}
                 </h3>
                 <p className="text-sm text-zinc-650 dark:text-zinc-400 max-w-md mx-auto leading-relaxed">
-                  Cảm ơn bạn đã gửi cấu hình yêu cầu tư vấn. Chuyên viên giải pháp ERP của SAHO sẽ liên hệ lại với bạn qua số điện thoại <span className="font-bold text-indigo-650 dark:text-indigo-400">{formData.phone}</span> và email trong vòng <span className="font-bold text-indigo-650 dark:text-indigo-400">2 giờ làm việc</span> để gửi báo giá chi tiết.
+                  {language === "vi" ? (
+                    <>
+                      Cảm ơn bạn đã gửi cấu hình yêu cầu tư vấn. Chuyên viên giải pháp ERP của SAHO sẽ liên hệ lại với bạn qua số điện thoại <span className="font-bold text-indigo-650 dark:text-indigo-400">{formData.phone}</span> và email trong vòng <span className="font-bold text-indigo-650 dark:text-indigo-400">2 giờ làm việc</span> để gửi báo giá chi tiết.
+                    </>
+                  ) : (
+                    <>
+                      Thank you for submitting your ERP configuration. A SAHO solutions expert will contact you via phone at <span className="font-bold text-indigo-650 dark:text-indigo-400">{formData.phone}</span> and email within <span className="font-bold text-indigo-650 dark:text-indigo-400">2 business hours</span> to provide a detailed quote.
+                    </>
+                  )}
                 </p>
               </div>
               <div className="pt-4">
@@ -101,9 +117,9 @@ export default function ContactForm() {
                       notes: "",
                     });
                   }}
-                  className="px-6 py-2.5 rounded-xl text-xs font-bold bg-zinc-100 hover:bg-zinc-200 text-zinc-600 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-300 transition-colors"
+                  className="px-6 py-2.5 rounded-xl text-xs font-bold bg-zinc-100 hover:bg-zinc-200 text-zinc-600 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer"
                 >
-                  Tạo yêu cầu mới
+                  {language === "vi" ? "Tạo yêu cầu mới" : "Create new request"}
                 </button>
               </div>
             </div>
@@ -115,13 +131,13 @@ export default function ContactForm() {
               <div className="space-y-3">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 text-[10px] font-bold uppercase tracking-wider">
                   <Sparkles className="w-3 h-3" />
-                  Đăng Ký Khảo Sát & Nhận Báo Giá Chi Tiết
+                  {language === "vi" ? "Đăng Ký Khảo Sát & Nhận Báo Giá Chi Tiết" : "Register for Consultation & Detailed Quote"}
                 </div>
                 <h3 className="text-2xl font-extrabold text-zinc-900 dark:text-white">
-                  Tư Vấn Thiết Kế Bản Đồ Giải Pháp ERP
+                  {t.contactTitle}
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-550 dark:text-zinc-455">
-                  Điền thông tin quy mô của doanh nghiệp bạn bên dưới để nhận được phương án tư vấn tối ưu từ đội ngũ kỹ sư giải pháp cấp cao của SAHO.
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+                  {t.contactDesc}
                 </p>
               </div>
 
@@ -139,8 +155,8 @@ export default function ContactForm() {
                   
                   {/* Name */}
                   <div className="space-y-2">
-                    <label htmlFor="contact-name" className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
-                      Họ và Tên người liên hệ
+                    <label htmlFor="contact-name" className="text-xs font-bold text-zinc-750 dark:text-zinc-300 uppercase tracking-wider">
+                      {t.contactFieldName}
                     </label>
                     <div className="relative">
                       <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
@@ -148,7 +164,7 @@ export default function ContactForm() {
                         type="text"
                         id="contact-name"
                         required
-                        placeholder="Nguyễn Văn A"
+                        placeholder={t.contactPlaceholderName}
                         value={formData.name}
                         onChange={handleChange}
                         className="w-full pl-10 pr-4 py-3 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-zinc-800 dark:text-white"
@@ -158,8 +174,8 @@ export default function ContactForm() {
 
                   {/* Company */}
                   <div className="space-y-2">
-                    <label htmlFor="contact-company" className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
-                      Tên Doanh nghiệp / Tổ chức
+                    <label htmlFor="contact-company" className="text-xs font-bold text-zinc-750 dark:text-zinc-300 uppercase tracking-wider">
+                      {language === "vi" ? "Tên Doanh nghiệp / Tổ chức" : "Company / Organization Name"}
                     </label>
                     <div className="relative">
                       <Building className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
@@ -167,7 +183,7 @@ export default function ContactForm() {
                         type="text"
                         id="contact-company"
                         required
-                        placeholder="Công ty Cổ phần SAHO"
+                        placeholder={language === "vi" ? "Công ty Cổ phần SAHO" : "SAHO Corporation"}
                         value={formData.company}
                         onChange={handleChange}
                         className="w-full pl-10 pr-4 py-3 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-zinc-800 dark:text-white"
@@ -177,8 +193,8 @@ export default function ContactForm() {
 
                   {/* Email */}
                   <div className="space-y-2">
-                    <label htmlFor="contact-email" className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
-                      Địa chỉ Email doanh nghiệp
+                    <label htmlFor="contact-email" className="text-xs font-bold text-zinc-750 dark:text-zinc-300 uppercase tracking-wider">
+                      {t.contactFieldEmail}
                     </label>
                     <div className="relative">
                       <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
@@ -186,7 +202,7 @@ export default function ContactForm() {
                         type="email"
                         id="contact-email"
                         required
-                        placeholder="ceo@saho.vn"
+                        placeholder={t.contactPlaceholderEmail}
                         value={formData.email}
                         onChange={handleChange}
                         className="w-full pl-10 pr-4 py-3 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-zinc-800 dark:text-white"
@@ -196,8 +212,8 @@ export default function ContactForm() {
 
                   {/* Phone */}
                   <div className="space-y-2">
-                    <label htmlFor="contact-phone" className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
-                      Số điện thoại di động
+                    <label htmlFor="contact-phone" className="text-xs font-bold text-zinc-750 dark:text-zinc-300 uppercase tracking-wider">
+                      {t.contactFieldPhone}
                     </label>
                     <div className="relative">
                       <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
@@ -205,7 +221,7 @@ export default function ContactForm() {
                         type="tel"
                         id="contact-phone"
                         required
-                        placeholder="0909123456"
+                        placeholder={t.contactPlaceholderPhone}
                         value={formData.phone}
                         onChange={handleChange}
                         className="w-full pl-10 pr-4 py-3 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-zinc-800 dark:text-white"
@@ -220,8 +236,8 @@ export default function ContactForm() {
                   
                   {/* Users */}
                   <div className="space-y-2">
-                    <label htmlFor="contact-users" className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
-                      Số lượng Users định lượng
+                    <label htmlFor="contact-users" className="text-xs font-bold text-zinc-750 dark:text-zinc-300 uppercase tracking-wider">
+                      {language === "vi" ? "Số lượng Users dự kiến" : "Estimated Number of Users"}
                     </label>
                     <input
                       type="number"
@@ -236,27 +252,27 @@ export default function ContactForm() {
 
                   {/* Industry */}
                   <div className="space-y-2">
-                    <label htmlFor="contact-industry" className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
-                      Ngành nghề hoạt động
+                    <label htmlFor="contact-industry" className="text-xs font-bold text-zinc-750 dark:text-zinc-300 uppercase tracking-wider">
+                      {language === "vi" ? "Ngành nghề hoạt động" : "Industry Segment"}
                     </label>
                     <CustomSelect
                       id="contact-industry"
                       value={formData.industry}
                       onChange={(val) => handleCustomChange("industry", val)}
-                      options={INDUSTRIES.map((ind) => ({ value: ind.id, label: ind.name }))}
+                      options={industries.map((ind) => ({ value: ind.id, label: ind.name }))}
                     />
                   </div>
 
                   {/* Tier */}
                   <div className="space-y-2">
-                    <label htmlFor="contact-tier" className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
-                      Gói dịch vụ mong muốn
+                    <label htmlFor="contact-tier" className="text-xs font-bold text-zinc-750 dark:text-zinc-300 uppercase tracking-wider">
+                      {t.contactFieldPlan}
                     </label>
                     <CustomSelect
                       id="contact-tier"
                       value={formData.tier}
                       onChange={(val) => handleCustomChange("tier", val)}
-                      options={PRICING_TIERS.map((tier) => ({ value: tier.id, label: tier.name }))}
+                      options={pricingTiers.map((tier) => ({ value: tier.id, label: tier.name }))}
                     />
                   </div>
 
@@ -264,13 +280,13 @@ export default function ContactForm() {
 
                 {/* Notes */}
                 <div className="space-y-2 pt-2 border-t border-zinc-100 dark:border-zinc-800">
-                  <label htmlFor="contact-notes" className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
-                    Ghi chú đặc thù hoặc yêu cầu riêng
+                  <label htmlFor="contact-notes" className="text-xs font-bold text-zinc-750 dark:text-zinc-300 uppercase tracking-wider">
+                    {t.contactFieldMessage}
                   </label>
                   <textarea
                     id="contact-notes"
                     rows={4}
-                    placeholder="Mô tả sơ lược về quy trình hiện tại, hệ thống kế toán đang dùng, hoặc các vấn đề lớn nhất doanh nghiệp đang đối mặt..."
+                    placeholder={t.contactPlaceholderMessage}
                     value={formData.notes}
                     onChange={handleChange}
                     className="w-full px-4 py-3 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-zinc-800 dark:text-white resize-y"
@@ -287,12 +303,12 @@ export default function ContactForm() {
                     {loading ? (
                       <>
                         <Loader2 className="w-5 h-5 animate-spin" />
-                        Đang gửi yêu cầu...
+                        {t.contactBtnSubmitting}
                       </>
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        Gửi Yêu Cầu Khảo Sát & Nhận Báo Giá
+                        {t.contactBtnSubmit}
                       </>
                     )}
                   </button>

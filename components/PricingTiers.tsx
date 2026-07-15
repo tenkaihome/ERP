@@ -1,12 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Check, ArrowRight, ShieldCheck, Zap, Globe, Sparkles } from "lucide-react";
-import { PRICING_TIERS, PricingTier } from "../common/constants";
+import { getPricingTiers, PricingTier } from "../common/constants";
+import { useLanguage } from "@/components/LanguageProvider";
+import { TRANSLATIONS } from "@/common/translations";
 import { formatUSD, formatVND } from "../common/utils";
 
 export default function PricingTiers() {
   const [currency, setCurrency] = useState<"USD" | "VND">("USD");
+  const { language } = useLanguage();
+  const t = TRANSLATIONS[language];
+
+  const pricingTiers = useMemo(() => getPricingTiers(language), [language]);
 
   const formatPrice = (value: number) => {
     return currency === "USD" ? formatUSD(value, true) : formatVND(value, true);
@@ -45,10 +51,10 @@ export default function PricingTiers() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-2xl">
             <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white sm:text-4xl">
-              Cấu Trúc Gói Dịch Vụ ERP Chuẩn Hóa
+              {t.pricingTitle}
             </h2>
-            <p className="mt-3 text-lg text-zinc-650 dark:text-zinc-400">
-              Được phân loại theo quy mô và mức độ hoàn thiện quy trình của doanh nghiệp. Tham chiếu theo mặt bằng thị trường thực tế 2025 - 2026.
+            <p className="mt-3 text-lg text-zinc-655 dark:text-zinc-400">
+              {t.pricingDesc}
             </p>
           </div>
           
@@ -56,7 +62,7 @@ export default function PricingTiers() {
           <div className="flex items-center gap-2 p-1.5 bg-zinc-100 dark:bg-zinc-900 rounded-2xl border border-zinc-200/50 dark:border-zinc-800/50 self-start md:self-auto">
             <button
               onClick={() => setCurrency("USD")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 currency === "USD"
                   ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white shadow-sm"
                   : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200"
@@ -66,7 +72,7 @@ export default function PricingTiers() {
             </button>
             <button
               onClick={() => setCurrency("VND")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 currency === "VND"
                   ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white shadow-sm"
                   : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200"
@@ -79,7 +85,7 @@ export default function PricingTiers() {
 
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-          {PRICING_TIERS.map((tier) => {
+          {pricingTiers.map((tier) => {
             const isPopular = tier.popular;
             return (
               <div
@@ -93,7 +99,7 @@ export default function PricingTiers() {
                 {/* Popular Badge */}
                 {isPopular && (
                   <span className="absolute top-0 right-8 -translate-y-1/2 bg-gradient-to-r from-indigo-600 to-amber-500 text-white text-[10px] font-black tracking-wider uppercase px-3 py-1 rounded-full shadow-md z-10">
-                    Khuyên dùng
+                    {t.pricingRecommendBadge}
                   </span>
                 )}
 
@@ -121,7 +127,7 @@ export default function PricingTiers() {
                     </span>
                   </div>
 
-                  <p className={`text-xs mb-6 font-medium leading-relaxed ${isPopular ? "text-indigo-300" : "text-zinc-500 dark:text-zinc-400"}`}>
+                  <p className={`text-xs mb-6 font-medium leading-relaxed ${isPopular ? "text-indigo-300" : "text-zinc-500 dark:text-zinc-455"}`}>
                     {tier.subtitle}
                   </p>
 
@@ -131,10 +137,10 @@ export default function PricingTiers() {
                       <span className={`text-3xl sm:text-4xl font-black tracking-tight ${isPopular ? "text-white" : "text-zinc-900 dark:text-white"}`}>
                         {formatPrice(tier.basePriceMin)} - {formatPrice(tier.basePriceMax)}
                       </span>
-                      <span className={`text-xs font-semibold ${isPopular ? "text-zinc-400" : "text-zinc-500"}`}>/ user / tháng</span>
+                      <span className={`text-xs font-semibold ${isPopular ? "text-zinc-400" : "text-zinc-500"}`}>/ user / {language === "vi" ? "tháng" : "month"}</span>
                     </div>
                     <div className={`text-[11px] font-medium ${isPopular ? "text-zinc-400" : "text-zinc-500"}`}>
-                      Chi phí triển khai: <span className={`font-bold ${isPopular ? "text-amber-400" : "text-zinc-700 dark:text-zinc-300"}`}>{formatPrice(tier.implementationMin)} - {formatPrice(tier.implementationMax)}</span>
+                      {language === "vi" ? "Chi phí triển khai: " : "Implementation cost: "} <span className={`font-bold ${isPopular ? "text-amber-400" : "text-zinc-700 dark:text-zinc-300"}`}>{formatPrice(tier.implementationMin)} - {formatPrice(tier.implementationMax)}</span>
                     </div>
                   </div>
 
@@ -143,7 +149,7 @@ export default function PricingTiers() {
                   {/* Target Description */}
                   <div className="space-y-4 mb-8">
                     <div className={`text-xs font-bold uppercase tracking-wider ${isPopular ? "text-amber-400" : "text-zinc-400"}`}>
-                      Đối tượng phù hợp
+                      {t.pricingTarget}
                     </div>
                     <p className={`text-sm leading-relaxed font-medium ${isPopular ? "text-zinc-200" : "text-zinc-700 dark:text-zinc-300"}`}>
                       {tier.targetDescription}
@@ -163,7 +169,7 @@ export default function PricingTiers() {
                   {/* Core Features */}
                   <div className="space-y-4">
                     <div className={`text-xs font-bold uppercase tracking-wider ${isPopular ? "text-amber-400" : "text-zinc-400"}`}>
-                      Tính năng cốt lõi bao gồm
+                      {t.pricingFeatures}
                     </div>
                     <ul className="space-y-3.5">
                       {tier.features.map((feature, idx) => (
@@ -187,7 +193,7 @@ export default function PricingTiers() {
                     : "bg-zinc-50/50 dark:bg-zinc-900/40 border-zinc-200/40 dark:border-zinc-800/40"
                 }`}>
                   <div className="flex justify-between items-center text-xs">
-                    <span className={isPopular ? "text-zinc-450" : "text-zinc-400"}>Hệ thống đối chiếu:</span>
+                    <span className={isPopular ? "text-zinc-450" : "text-zinc-400"}>{t.pricingRef}</span>
                     <span className={`font-semibold ${isPopular ? "text-indigo-300" : "text-zinc-800 dark:text-zinc-200"}`}>{tier.referenceSystems}</span>
                   </div>
                   
@@ -199,7 +205,7 @@ export default function PricingTiers() {
                         : "bg-white hover:bg-zinc-50 text-zinc-800 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-white border border-zinc-200 dark:border-zinc-700"
                     }`}
                   >
-                    Lựa Chọn Gói Dịch Vụ
+                    {t.pricingSelectBtn}
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>

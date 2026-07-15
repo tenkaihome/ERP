@@ -17,7 +17,9 @@ import {
   TrendingUp,
   Award
 } from "lucide-react";
-import { PRICING_TIERS, INDUSTRIES, Industry, PricingTier } from "../common/constants";
+import { getPricingTiers, getIndustries, Industry, PricingTier } from "../common/constants";
+import { useLanguage } from "@/components/LanguageProvider";
+import { TRANSLATIONS } from "@/common/translations";
 import { calculateCost, formatUSD, formatVND, getSuggestedTierId } from "../common/utils";
 
 // Map industry icons to component
@@ -35,14 +37,20 @@ const iconMap: Record<string, React.ComponentType<any>> = {
 export default function InteractiveCalculator() {
   const [users, setUsers] = useState<number>(100);
   const [selectedIndustry, setSelectedIndustry] = useState<string>("general");
+  const { language } = useLanguage();
+  const t = TRANSLATIONS[language];
 
   const snapValues = [25, 50, 100, 250, 500, 1000];
+
+  // Resolve bilingual constants
+  const pricingTiers = useMemo(() => getPricingTiers(language), [language]);
+  const industries = useMemo(() => getIndustries(language), [language]);
 
   // Find corresponding suggested tier based on user count
   const suggestedTierId = useMemo(() => getSuggestedTierId(users), [users]);
   const suggestedTier = useMemo(() => {
-    return PRICING_TIERS.find((t) => t.id === suggestedTierId) || PRICING_TIERS[0];
-  }, [suggestedTierId]);
+    return pricingTiers.find((t) => t.id === suggestedTierId) || pricingTiers[0];
+  }, [pricingTiers, suggestedTierId]);
 
   // Calculate costs
   const costs = useMemo(() => {
@@ -76,10 +84,10 @@ export default function InteractiveCalculator() {
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white sm:text-4xl">
-            Ước Tính Tổng Chi Phí Sở Hữu (TCO)
+            {t.calcTitle}
           </h2>
-          <p className="text-lg text-zinc-600 dark:text-zinc-400">
-            Sử dụng công cụ tương tác để lập kế hoạch ngân sách dự toán trong 3 năm. Lượng user và ngành nghề sẽ quyết định trực tiếp quy mô đầu tư của bạn.
+          <p className="text-lg text-zinc-650 dark:text-zinc-400">
+            {t.calcDesc}
           </p>
         </div>
 
@@ -93,13 +101,13 @@ export default function InteractiveCalculator() {
               <div className="flex items-center justify-between">
                 <label className="flex items-center gap-2 text-base font-bold text-zinc-900 dark:text-white">
                   <Users className="w-5 h-5 text-indigo-500" />
-                  Số lượng người dùng hệ thống (Users)
+                  {t.calcSliderUsers}
                 </label>
                 <div className="flex items-baseline gap-1 bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-100 dark:border-indigo-900/50 px-3 py-1.5 rounded-xl">
                   <span className="text-2xl font-black text-indigo-600 dark:text-indigo-400 tabular-nums">
                     {users}
                   </span>
-                  <span className="text-xs font-semibold text-indigo-500">users</span>
+                  <span className="text-xs font-semibold text-indigo-500">{t.calcUsersSuffix}</span>
                 </div>
               </div>
 
@@ -122,13 +130,13 @@ export default function InteractiveCalculator() {
                   <button
                     key={val}
                     onClick={() => handleSnap(val)}
-                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                    className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                       users === val
                         ? "bg-indigo-600 text-white shadow-sm shadow-indigo-600/10"
-                        : "bg-zinc-100 hover:bg-zinc-200 text-zinc-600 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-400"
+                        : "bg-zinc-100 hover:bg-zinc-200 text-zinc-650 dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-400"
                     }`}
                   >
-                    {val.toLocaleString()} Users
+                    {val.toLocaleString()} {t.calcUsersSuffix}
                   </button>
                 ))}
               </div>
@@ -138,25 +146,28 @@ export default function InteractiveCalculator() {
             <div className="space-y-4 pt-4 border-t border-zinc-100 dark:border-zinc-800">
               <label className="flex items-center gap-2 text-base font-bold text-zinc-900 dark:text-white">
                 <Briefcase className="w-5 h-5 text-indigo-500" />
-                Chọn ngành nghề hoạt động của Doanh nghiệp
+                {t.calcSelectIndustry}
               </label>
               <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                Mỗi ngành có quy trình đặc thù và độ phức tạp khác nhau. Ví dụ: Ngành Sản xuất (Manufacturing) đòi hỏi cấu trúc định mức nguyên vật liệu (BOM) phức tạp hơn ngành Dịch vụ thương mại.
+                {language === "vi" 
+                  ? "Mỗi ngành có quy trình đặc thù và độ phức tạp khác nhau. Ví dụ: Ngành Sản xuất (Manufacturing) đòi hỏi cấu trúc định mức nguyên vật liệu (BOM) phức tạp hơn ngành Dịch vụ thương mại."
+                  : "Each industry has its own unique processes and complexity. For example, Manufacturing requires a complex multi-level Bill of Materials (BOM) compared to Commerce & Services."
+                }
               </p>
 
               {/* Grid of industries */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {INDUSTRIES.map((ind) => {
+                {industries.map((ind) => {
                   const Icon = iconMap[ind.icon] || Briefcase;
                   const isSelected = selectedIndustry === ind.id;
                   return (
                     <button
                       key={ind.id}
                       onClick={() => setSelectedIndustry(ind.id)}
-                      className={`flex flex-col items-center justify-center p-4 rounded-2xl border text-center transition-all group ${
+                      className={`flex flex-col items-center justify-center p-4 rounded-2xl border text-center transition-all group cursor-pointer ${
                         isSelected
                           ? "bg-indigo-50 border-indigo-500 text-indigo-700 dark:bg-indigo-950/30 dark:border-indigo-500 dark:text-indigo-400 shadow-sm"
-                          : "bg-zinc-50/50 hover:bg-zinc-50 dark:bg-zinc-900/50 dark:hover:bg-zinc-800/50 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-700"
+                          : "bg-zinc-50/50 hover:bg-zinc-50 dark:bg-zinc-900/50 dark:hover:bg-zinc-800/50 border-zinc-200 dark:border-zinc-800 text-zinc-650 dark:text-zinc-400 hover:border-zinc-300 dark:hover:border-zinc-700"
                       }`}
                     >
                       <Icon className={`w-6 h-6 mb-2 transition-transform duration-300 group-hover:scale-110 ${
@@ -180,9 +191,10 @@ export default function InteractiveCalculator() {
             <div className="flex items-center gap-3 p-4 rounded-2xl bg-indigo-50/70 border border-indigo-100/50 dark:bg-indigo-950/20 dark:border-indigo-950/30 text-indigo-700 dark:text-indigo-400">
               <Award className="w-5 h-5 shrink-0" />
               <div className="text-xs font-semibold">
-                Đề xuất hệ thống phù hợp: <span className="font-extrabold underline">{suggestedTier.name}</span>
+                {language === "vi" ? "Đề xuất hệ thống phù hợp: " : "Suggested system: "}
+                <span className="font-extrabold underline">{suggestedTier.name}</span>
                 <span className="block text-zinc-500 dark:text-zinc-400 font-normal mt-0.5">
-                  Tương đương: {suggestedTier.referenceSystems}
+                  {language === "vi" ? "Tương đương: " : "Equivalent to: "} {suggestedTier.referenceSystems}
                 </span>
               </div>
             </div>
@@ -195,7 +207,7 @@ export default function InteractiveCalculator() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-indigo-400">
-                    Ước tính TCO 3 năm (Trọn gói)
+                    {t.calcResultsTco}
                   </h3>
                   <div className="mt-1 flex flex-col">
                     <span className="text-4xl sm:text-5xl font-black tracking-tight text-white tabular-nums">
@@ -206,7 +218,10 @@ export default function InteractiveCalculator() {
                     </span>
                   </div>
                   <p className="text-[10px] text-indigo-300 mt-2">
-                    * Đã bao gồm Bản quyền 3 năm, Triển khai, Đào tạo, và Bảo trì.
+                    {language === "vi" 
+                      ? "* Đã bao gồm Bản quyền 3 năm, Triển khai, Đào tạo, và Bảo trì."
+                      : "* Includes 3-year Licenses, Implementation Services, Training, and Support."
+                    }
                   </p>
                 </div>
 
@@ -217,11 +232,14 @@ export default function InteractiveCalculator() {
                   {/* Monthly per User */}
                   <div className="flex justify-between items-center text-zinc-400">
                     <span className="flex items-center gap-1.5">
-                      Đơn giá bản quyền / tháng
+                      {language === "vi" ? "Đơn giá bản quyền / tháng" : "License unit price / month"}
                       <span className="group relative cursor-pointer text-indigo-400 hover:text-indigo-300">
                         <Info className="w-3.5 h-3.5" />
                         <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-zinc-900 text-[10px] text-zinc-300 rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-20 shadow-md">
-                          Chi phí thuê bao phần mềm định kỳ trên mỗi người dùng hàng tháng.
+                          {language === "vi"
+                            ? "Chi phí thuê bao phần mềm định kỳ trên mỗi người dùng hàng tháng."
+                            : "Recurring software subscription fee per user monthly."
+                          }
                         </span>
                       </span>
                     </span>
@@ -232,7 +250,7 @@ export default function InteractiveCalculator() {
 
                   {/* Total License 3 Years */}
                   <div className="flex justify-between items-center text-zinc-400">
-                    <span>Tổng bản quyền (36 tháng)</span>
+                    <span>{language === "vi" ? "Tổng bản quyền (36 tháng)" : "Total Licenses (36 months)"}</span>
                     <span className="font-semibold text-white">
                       {formatUSD(costs.threeYearLicenseTotal)}
                     </span>
@@ -241,11 +259,14 @@ export default function InteractiveCalculator() {
                   {/* Implementation */}
                   <div className="flex justify-between items-center text-zinc-400">
                     <span className="flex items-center gap-1.5">
-                      Dịch vụ Triển khai (1 lần)
+                      {language === "vi" ? "Dịch vụ Triển khai (1 lần)" : "Implementation Services (one-time)"}
                       <span className="group relative cursor-pointer text-indigo-400 hover:text-indigo-300">
                         <Info className="w-3.5 h-3.5" />
                         <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 p-2 bg-zinc-900 text-[10px] text-zinc-300 rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-20 shadow-md">
-                          Khảo sát quy trình, thiết lập hệ thống, import data, lập trình báo cáo. Đã nhân hệ số ngành.
+                          {language === "vi"
+                            ? "Khảo sát quy trình, thiết lập hệ thống, import data, lập trình báo cáo. Đã nhân hệ số ngành."
+                            : "Process mapping, system setup, data migration, custom report programming. Adjusted by industry multiplier."
+                          }
                         </span>
                       </span>
                     </span>
@@ -256,7 +277,7 @@ export default function InteractiveCalculator() {
 
                   {/* Training */}
                   <div className="flex justify-between items-center text-zinc-400">
-                    <span>Đào tạo & Quản trị thay đổi</span>
+                    <span>{t.calcResultsTraining}</span>
                     <span className="font-semibold text-white">
                       {formatUSD(costs.trainingCost)}
                     </span>
@@ -264,7 +285,7 @@ export default function InteractiveCalculator() {
 
                   {/* Support */}
                   <div className="flex justify-between items-center text-zinc-400">
-                    <span>Vận hành & Hỗ trợ (3 năm)</span>
+                    <span>{language === "vi" ? "Vận hành & Hỗ trợ (3 năm)" : "Maintenance & Support (3 years)"}</span>
                     <span className="font-semibold text-white">
                       {formatUSD(costs.threeYearOngoingCost)}
                     </span>
@@ -273,9 +294,9 @@ export default function InteractiveCalculator() {
 
                 {/* Cost ratio progress bar */}
                 <div className="pt-2">
-                  <div className="flex justify-between text-[11px] text-zinc-400 mb-1.5 font-bold">
-                    <span>Bản quyền: {Math.round((costs.threeYearLicenseTotal / costs.threeYearTco) * 100)}%</span>
-                    <span>Triển khai & khác: {Math.round(((costs.threeYearTco - costs.threeYearLicenseTotal) / costs.threeYearTco) * 100)}%</span>
+                  <div className="flex justify-between text-[11px] text-zinc-450 mb-1.5 font-bold">
+                    <span>{language === "vi" ? "Bản quyền: " : "License: "}{Math.round((costs.threeYearLicenseTotal / costs.threeYearTco) * 100)}%</span>
+                    <span>{language === "vi" ? "Triển khai & khác: " : "Implementation & others: "}{Math.round(((costs.threeYearTco - costs.threeYearLicenseTotal) / costs.threeYearTco) * 100)}%</span>
                   </div>
                   <div className="h-2 bg-indigo-950 rounded-full overflow-hidden flex border border-indigo-900">
                     <div 
@@ -292,9 +313,9 @@ export default function InteractiveCalculator() {
                 <div className="pt-4">
                   <button
                     onClick={handleContactFill}
-                    className="w-full inline-flex items-center justify-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold px-6 py-3.5 rounded-2xl transition-all duration-300 shadow-md shadow-amber-500/10 group"
+                    className="w-full inline-flex items-center justify-center gap-1.5 bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold px-6 py-3.5 rounded-2xl transition-all duration-300 shadow-md shadow-amber-500/10 group cursor-pointer"
                   >
-                    Gửi Cấu Hình Nhận Báo Giá Chi Tiết
+                    {language === "vi" ? "Gửi Cấu Hình Nhận Báo Giá Chi Tiết" : "Send Configuration for Detailed Quote"}
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>

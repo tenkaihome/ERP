@@ -1,0 +1,212 @@
+export const TRANSLATIONS = {
+  vi: {
+    // Navigation
+    tcoCalculator: "Bộ Tính Chi Phí TCO",
+    pricingPackages: "Gói Dịch Vụ ERP",
+    comparison: "So Sánh ERP",
+    breakdown: "Cơ Cấu Đầu Tư",
+    faq: "Hỏi Đáp (FAQ)",
+    contactBtn: "Đăng Ký Tư Vấn",
+
+    // Hero Section
+    heroBadge: "BẢN ĐỒ BÁO GIÁ THỰC TẾ 2025 - 2026",
+    heroTitlePart1: "Đầu Tư ERP Thực Chất:",
+    heroTitlePart2: " Không Chỉ Là Bản Quyền,",
+    heroTitlePart3: " Đó Là Giải Pháp & Triển Khai",
+    heroDesc: "Nhiều doanh nghiệp thất bại khi chỉ quan tâm tới giá mua phần mềm (License). Thực tế, bản quyền chỉ chiếm 20% - 40% tổng đầu tư. 30% - 50% ngân sách quyết định sự thành bại nằm ở khâu Triển Khai & Vận Hành.",
+    heroBtnPrimary: "Tính Chi Phí TCO Ngay",
+    heroBtnSecondary: "Xem Thẻ Gói Chi Tiết",
+    heroBannerTitle: "CƠ CẤU NGÂN SÁCH ERP TIÊU CHUẨN",
+    heroBannerSub: "* Tỷ lệ trung bình của các dự án SAP, NetSuite và Dynamics 365.",
+    heroBannerHighlight: "Giải pháp của SAHO đã tối ưu hóa trọn gói",
+    licenseLabel: "License 30%",
+    implementationLabel: "Triển khai 40%",
+    trainingLabel: "Đào tạo 15%",
+    supportLabel: "Vận hành 15%",
+
+    // Calculator Section
+    calcTitle: "Công Cụ Hoạch Định & Ước Tính TCO",
+    calcDesc: "Mô phỏng tổng chi phí sở hữu (Total Cost of Ownership) trong 3 năm vận hành. Hãy trượt thanh cuộn dưới để ước tính ngân sách phù hợp.",
+    calcSliderUsers: "Số lượng người dùng (Users)",
+    calcSelectIndustry: "Nhóm ngành hoạt động",
+    calcSelectComplexity: "Độ phức tạp quy trình",
+    calcComplexityStandard: "Quy trình chuẩn hóa (Standard)",
+    calcComplexityCustomized: "Cần chỉnh sửa vừa phải (Customized)",
+    calcComplexityTailormade: "Cấu hình may đo chuyên sâu (Tailor-made)",
+    calcResultsTitle: "Phân Bổ Ngân Sách Ước Tính (3 Năm)",
+    calcResultsNote: "* Dữ liệu mang tính chất tham khảo dựa trên thống kê thị trường. Liên hệ tư vấn để nhận báo giá chi tiết.",
+    calcResultsTco: "Tổng TCO (3 Năm)",
+    calcResultsLicense: "Phần mềm (License)",
+    calcResultsImplementation: "Triển khai (Implementation)",
+    calcResultsTraining: "Đào tạo & Vận hành",
+    calcResultsSupport: "Hỗ trợ kỹ thuật",
+    calcUsersSuffix: "người dùng",
+    calcComplexityMultiplier: "Hệ số phức tạp quy trình",
+    calcIndustryMultiplier: "Hệ số phức tạp ngành nghề",
+
+    // Pricing Section
+    pricingTitle: "Cấu Trúc Gói Dịch Vụ ERP Chuẩn Hóa",
+    pricingDesc: "Được phân loại theo quy mô và mức độ hoàn thiện quy trình của doanh nghiệp. Tham chiếu theo mặt bằng thị trường thực tế 2025 - 2026.",
+    pricingTarget: "Đối tượng phù hợp",
+    pricingFeatures: "Tính năng cốt lõi bao gồm",
+    pricingRef: "Hệ thống đối chiếu:",
+    pricingSelectBtn: "Lựa Chọn Gói Dịch Vụ",
+    pricingRecommendBadge: "Khuyên dùng",
+
+    // Comparison Section
+    compBadge: "SO SÁNH BẢNG GIÁ & TÍNH NĂNG",
+    compTitle: "Saho ERP vs Phần Mềm Khác",
+    compDesc: "Sở hữu các tính năng nghiệp vụ quy chuẩn quốc tế sánh ngang Odoo, NetSuite, SAP nhưng được tối ưu hóa đặc biệt và bản địa hóa hoàn hảo cho thị trường Việt Nam.",
+    compColFeature: "Tính Năng / Đặc Điểm",
+    compColOptimal: "Lựa chọn tối ưu",
+    compMobileSwipe: "👉 Vuốt ngang màn hình để xem đầy đủ bảng so sánh",
+    compLegendAvailable: "Có sẵn / Đầy đủ",
+    compLegendPartial: "Hỗ trợ một phần",
+    compLegendCustom: "Lập trình tùy chỉnh thêm (Custom)",
+    compLegendUnsupported: "Không hỗ trợ mặc định",
+
+    // Budget Breakdown Section
+    breakdownTitle: "Cơ Cấu Chi Phí ERP: Tại Sao Triển Khai Lại Quan Trọng?",
+    breakdownDesc: "Triển khai thành công chiếm hơn một nửa giá trị cốt lõi của dự án ERP. Dưới đây là cách dòng tiền đầu tư của bạn hoạt động hiệu quả.",
+
+    // FAQ Section
+    faqTitle: "Giải Đáp Thắc Mắc Thường Gặp",
+    faqDesc: "Tổng hợp các câu hỏi phổ biến nhất từ doanh nghiệp khi tìm hiểu và xây dựng ngân sách dự án ERP.",
+
+    // Contact Form Section
+    contactTitle: "Đăng Ký Tư Vấn & Nhận Báo Giá Chi Tiết",
+    contactDesc: "Hãy để lại thông tin. Đội ngũ chuyên viên tư vấn ERP của SAHO sẽ liên hệ và khảo sát nhu cầu trực tiếp trong vòng 24 giờ làm việc.",
+    contactFieldName: "Họ và tên",
+    contactPlaceholderName: "Ví dụ: Nguyễn Văn A",
+    contactFieldEmail: "Email công việc",
+    contactPlaceholderEmail: "Ví dụ: a.nguyen@company.com",
+    contactFieldPhone: "Số điện thoại",
+    contactPlaceholderPhone: "Ví dụ: 0912345678",
+    contactFieldCompanySize: "Quy mô nhân sự doanh nghiệp",
+    contactFieldPlan: "Gói dịch vụ quan tâm",
+    contactPlanDefault: "Chọn gói dịch vụ...",
+    contactPlanStarter: "Gói Starter (Tier 1)",
+    contactPlanGrowth: "Gói Growth (Tier 2)",
+    contactPlanEnterprise: "Gói Enterprise (Tier 3)",
+    contactFieldMessage: "Yêu cầu chi tiết hoặc câu hỏi bổ sung (nếu có)",
+    contactPlaceholderMessage: "Ví dụ: Chúng tôi có 150 nhân sự ngành sản xuất bán lẻ, cần tư vấn phân hệ kho và kế toán...",
+    contactBtnSubmit: "Gửi Yêu Cầu Tư Vấn",
+    contactBtnSubmitting: "Đang gửi...",
+    contactSuccessTitle: "Gửi Yêu Cầu Thành Công!",
+    contactSuccessDesc: "Cảm ơn bạn đã quan tâm đến giải pháp SAHO ERP. Chúng tôi đã nhận được thông tin đăng ký của bạn. Chuyên viên tư vấn sẽ liên hệ lại qua điện thoại/email trong vòng 24 giờ làm việc tiếp theo.",
+    contactSuccessClose: "Đóng cửa sổ",
+
+    // Footer Section
+    footerDesc: "SAHO ERP là đơn vị tư vấn độc lập và cung cấp dịch vụ triển khai phần mềm quản trị doanh nghiệp hàng đầu tại Việt Nam.",
+    footerLinksQuick: "Liên kết nhanh",
+    footerLinksLegal: "Pháp lý & Quy định",
+    footerLinkPrivacy: "Chính sách bảo mật",
+    footerLinkTerms: "Điều khoản sử dụng",
+    footerCopyright: "© 2026 SAHO ERP. Bảo lưu mọi quyền."
+  },
+  en: {
+    // Navigation
+    tcoCalculator: "TCO Calculator",
+    pricingPackages: "ERP Packages",
+    comparison: "ERP Comparison",
+    breakdown: "Investment Structure",
+    faq: "FAQ",
+    contactBtn: "Request Consultation",
+
+    // Hero Section
+    heroBadge: "REAL ERP PRICING ROADMAP 2025 - 2026",
+    heroTitlePart1: "Real ERP Investment:",
+    heroTitlePart2: " Not Just Licenses,",
+    heroTitlePart3: " It's Solution & Implementation",
+    heroDesc: "Many businesses fail by only focusing on software license costs. In reality, license fees only account for 20% - 40% of the total investment. 30% - 50% of the budget that determines success or failure lies in Implementation & Operations.",
+    heroBtnPrimary: "Calculate TCO Now",
+    heroBtnSecondary: "View Package Details",
+    heroBannerTitle: "STANDARD ERP BUDGET ALLOCATION",
+    heroBannerSub: "* Average ratio of SAP, NetSuite, and Dynamics 365 projects.",
+    heroBannerHighlight: "SAHO's solution is fully optimized & packaged",
+    licenseLabel: "License 30%",
+    implementationLabel: "Implementation 40%",
+    trainingLabel: "Training 15%",
+    supportLabel: "Support 15%",
+
+    // Calculator Section
+    calcTitle: "TCO Planning & Estimation Tool",
+    calcDesc: "Simulate the Total Cost of Ownership (TCO) over 3 years of operation. Drag the sliders below to estimate your suitable budget.",
+    calcSliderUsers: "Number of Users (Users)",
+    calcSelectIndustry: "Industry Sector",
+    calcSelectComplexity: "Process Complexity",
+    calcComplexityStandard: "Standardized Process (Standard)",
+    calcComplexityCustomized: "Moderate Customization (Customized)",
+    calcComplexityTailormade: "Specialized Tailor-made (Tailor-made)",
+    calcResultsTitle: "Estimated Budget Allocation (3 Years)",
+    calcResultsNote: "* Reference data based on market statistics. Contact us for a detailed quotation.",
+    calcResultsTco: "Total TCO (3 Years)",
+    calcResultsLicense: "Software License",
+    calcResultsImplementation: "Implementation Services",
+    calcResultsTraining: "Training & Go-live",
+    calcResultsSupport: "Annual Support",
+    calcUsersSuffix: "users",
+    calcComplexityMultiplier: "Process complexity multiplier",
+    calcIndustryMultiplier: "Industry complexity multiplier",
+
+    // Pricing Section
+    pricingTitle: "Standardized ERP Service Packages",
+    pricingDesc: "Classified by business size and process maturity level. Referenced to the actual market rates of 2025 - 2026.",
+    pricingTarget: "Target Audience",
+    pricingFeatures: "Core features included",
+    pricingRef: "Reference systems:",
+    pricingSelectBtn: "Select Service Package",
+    pricingRecommendBadge: "Recommended",
+
+    // Comparison Section
+    compBadge: "PRICING & FEATURES MATRIX",
+    compTitle: "Saho ERP vs The Rest",
+    compDesc: "Possesses international standard business features matching Odoo, NetSuite, and SAP, but specifically optimized and perfectly localized for the Vietnamese market.",
+    compColFeature: "Feature / Characteristic",
+    compColOptimal: "Optimal choice",
+    compMobileSwipe: "👉 Swipe horizontally to view full comparison table",
+    compLegendAvailable: "Available / Full",
+    compLegendPartial: "Partial support",
+    compLegendCustom: "Custom development needed (Custom)",
+    compLegendUnsupported: "Not supported by default",
+
+    // Budget Breakdown Section
+    breakdownTitle: "ERP Cost Structure: Why Implementation Matters",
+    breakdownDesc: "Successful implementation accounts for more than half of the core value of an ERP project. Here is how your investment cash flow works effectively.",
+
+    // FAQ Section
+    faqTitle: "Frequently Asked Questions",
+    faqDesc: "Compilation of the most common questions from businesses when researching and budgeting for ERP projects.",
+
+    // Contact Form Section
+    contactTitle: "Register for Consultation & Detailed Quote",
+    contactDesc: "Leave your details. SAHO's team of ERP consultants will contact you and conduct an onsite survey within 24 working hours.",
+    contactFieldName: "Full Name",
+    contactPlaceholderName: "e.g. John Doe",
+    contactFieldEmail: "Work Email",
+    contactPlaceholderEmail: "e.g. john.doe@company.com",
+    contactFieldPhone: "Phone Number",
+    contactPlaceholderPhone: "e.g. +84 912345678",
+    contactFieldCompanySize: "Company Size (Employees)",
+    contactFieldPlan: "Service Package of Interest",
+    contactPlanDefault: "Select a package...",
+    contactPlanStarter: "Starter Plan (Tier 1)",
+    contactPlanGrowth: "Growth Plan (Tier 2)",
+    contactPlanEnterprise: "Enterprise Plan (Tier 3)",
+    contactFieldMessage: "Detailed requirements or additional questions (optional)",
+    contactPlaceholderMessage: "e.g. We have 150 employees in retail manufacturing, looking for inventory and accounting modules...",
+    contactBtnSubmit: "Submit Consultation Request",
+    contactBtnSubmitting: "Submitting...",
+    contactSuccessTitle: "Request Submitted Successfully!",
+    contactSuccessDesc: "Thank you for your interest in SAHO ERP solutions. We have received your registration details. A consultant will contact you via phone/email within the next 24 working hours.",
+    contactSuccessClose: "Close Window",
+
+    // Footer Section
+    footerDesc: "SAHO ERP is a leading independent consulting firm and provider of enterprise resource planning software implementation services in Vietnam.",
+    footerLinksQuick: "Quick Links",
+    footerLinksLegal: "Legal & Compliance",
+    footerLinkPrivacy: "Privacy Policy",
+    footerLinkTerms: "Terms of Service",
+    footerCopyright: "© 2026 SAHO ERP. All rights reserved."
+  }
+};

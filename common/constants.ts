@@ -17,7 +17,7 @@ export interface PricingTier {
   popular?: boolean;
 }
 
-export const PRICING_TIERS: PricingTier[] = [
+export const PRICING_TIERS_VI: PricingTier[] = [
   {
     id: "starter",
     name: "Tier 1 - Starter",
@@ -104,6 +104,99 @@ export const PRICING_TIERS: PricingTier[] = [
   }
 ];
 
+export const PRICING_TIERS_EN: PricingTier[] = [
+  {
+    id: "starter",
+    name: "Tier 1 - Starter",
+    subtitle: "For Small & Medium Businesses (SMB)",
+    badge: "Quick Start",
+    basePriceMin: 10,
+    basePriceMax: 50,
+    standardPrice: 20,
+    implementationMin: 15000,
+    implementationMax: 80000,
+    minUsers: 10,
+    maxUsers: 100,
+    targetDescription: "Suitable for startups, retail shops, restaurants, hotels, and small businesses in the initial stages of digital transformation.",
+    targetDetails: [
+      "Staff size: 10 - 100 employees",
+      "Optimized budget, quick deployment",
+      "Simple operational processes"
+    ],
+    features: [
+      "HR | Basic profile & recruitment management",
+      "FA | Basic revenue, expense, profit & accounting",
+      "SC | Simple inventory, purchasing & sales",
+      "CR | Basic CRM & customer relationship",
+      "Support via Email & Chat group during business hours"
+    ],
+    referenceSystems: "Odoo / MS Business Central Basic",
+  },
+  {
+    id: "growth",
+    name: "Tier 2 - Growth",
+    subtitle: "Solution for Mid-market & Large Enterprises",
+    badge: "Most Popular",
+    basePriceMin: 50,
+    basePriceMax: 150,
+    standardPrice: 80,
+    implementationMin: 50000,
+    implementationMax: 200000,
+    minUsers: 100,
+    maxUsers: 1000,
+    targetDescription: "Suitable for large retail chains, manufacturing plants, logistics firms, hospitals, and schools needing comprehensive optimization.",
+    targetDetails: [
+      "Staff size: 100 - 1000 employees",
+      "Standardized processes ready for automation",
+      "Multi-company operational model"
+    ],
+    features: [
+      "HR, FA, SC, CR advanced & comprehensive",
+      "Multi-company management & data consolidation",
+      "Workflow Automation",
+      "Dynamic management reports & deep analytics",
+      "API integration with existing systems",
+      "24/7 technical support with committed SLA"
+    ],
+    referenceSystems: "NetSuite / MS Dynamics 365 BC Premium",
+    popular: true,
+  },
+  {
+    id: "enterprise",
+    name: "Tier 3 - Enterprise",
+    subtitle: "For Conglomerates & Large Corporates",
+    badge: "Unlimited",
+    basePriceMin: 150,
+    basePriceMax: 400,
+    standardPrice: 200,
+    implementationMin: 150000,
+    implementationMax: 800000,
+    minUsers: 1000,
+    maxUsers: 5000,
+    targetDescription: "Tailored for multi-industry groups, banks, oil & gas, telecoms, state-owned enterprises, or public investment projects.",
+    targetDetails: [
+      "Staff size: Over 1000 employees",
+      "Complex multi-country organizational structure",
+      "High compliance and absolute security requirements"
+    ],
+    features: [
+      "HR, FA, SC, CR tailor-made & highly customized",
+      "Full ERP integrated into every operational corner",
+      "AI & BI (Artificial Intelligence & Smart Predictive Reporting)",
+      "Multi-country management (Multi-language, multi-currency, multi-GAAP)",
+      "Strict compliance with international standards (Security & Compliance)",
+      "Onsite dedicated support team 24/7"
+    ],
+    referenceSystems: "SAP S/4HANA / Oracle Cloud ERP / Infor",
+  }
+];
+
+export const PRICING_TIERS = PRICING_TIERS_VI;
+
+export const getPricingTiers = (lang: "vi" | "en") => {
+  return lang === "vi" ? PRICING_TIERS_VI : PRICING_TIERS_EN;
+};
+
 export interface Industry {
   id: string;
   name: string;
@@ -111,7 +204,7 @@ export interface Industry {
   icon: string;
 }
 
-export const INDUSTRIES: Industry[] = [
+export const INDUSTRIES_VI: Industry[] = [
   { id: "general", name: "Thương mại & Dịch vụ chung", multiplier: 1.0, icon: "Briefcase" },
   { id: "retail", name: "Chuỗi Bán lẻ & Thương mại điện tử", multiplier: 1.15, icon: "ShoppingBag" },
   { id: "manufacturing", name: "Sản xuất & Chế biến", multiplier: 1.35, icon: "Factory" },
@@ -122,12 +215,29 @@ export const INDUSTRIES: Industry[] = [
   { id: "conglomerate", name: "Tập đoàn Đa ngành", multiplier: 1.45, icon: "Building2" },
 ];
 
+export const INDUSTRIES_EN: Industry[] = [
+  { id: "general", name: "General Commerce & Services", multiplier: 1.0, icon: "Briefcase" },
+  { id: "retail", name: "Retail Chain & E-commerce", multiplier: 1.15, icon: "ShoppingBag" },
+  { id: "manufacturing", name: "Manufacturing & Processing", multiplier: 1.35, icon: "Factory" },
+  { id: "logistics", name: "Transportation & Logistics", multiplier: 1.2, icon: "Truck" },
+  { id: "healthcare", name: "Hospital & Healthcare", multiplier: 1.4, icon: "Heart" },
+  { id: "education", name: "School & Education", multiplier: 1.1, icon: "GraduationCap" },
+  { id: "finance", name: "Finance & Banking", multiplier: 1.5, icon: "DollarSign" },
+  { id: "conglomerate", name: "Multi-industry Conglomerate", multiplier: 1.45, icon: "Building2" },
+];
+
+export const INDUSTRIES = INDUSTRIES_VI;
+
+export const getIndustries = (lang: "vi" | "en") => {
+  return lang === "vi" ? INDUSTRIES_VI : INDUSTRIES_EN;
+};
+
 export interface FAQ {
   question: string;
   answer: string;
 }
 
-export const FAQS: FAQ[] = [
+export const FAQS_VI: FAQ[] = [
   {
     question: "Tại sao chi phí triển khai lại chiếm từ 30% - 50% tổng chi phí dự án ERP?",
     answer: "Triển khai ERP không chỉ là cài đặt phần mềm. Chi phí này chi trả cho các hoạt động khảo sát quy trình, tư vấn tái cấu trúc quy trình chuẩn, thiết lập tham số hệ thống, lập trình các biểu mẫu báo cáo riêng, chuyển đổi và chuẩn hóa dữ liệu cũ, đào tạo đội ngũ nhân viên và hỗ trợ vận hành thực tế trong những tháng đầu tiên. Không có triển khai bài bản, tỷ lệ thất bại dự án ERP có thể lên tới hơn 70%."
@@ -150,6 +260,35 @@ export const FAQS: FAQ[] = [
   }
 ];
 
+export const FAQS_EN: FAQ[] = [
+  {
+    question: "Why does the implementation cost account for 30% - 50% of the total ERP project cost?",
+    answer: "Implementing an ERP is not just installing software. This fee covers business process mapping, standardized process re-engineering consulting, system parameter configuration, custom forms/reports programming, data migration/cleaning, staff training, and go-live support in the initial months. Without proper implementation, the failure rate can exceed 70%."
+  },
+  {
+    question: "How much does the software license cost in reality?",
+    answer: "Market statistics show that software license fees only account for 20% - 40% of the total initial investment. This means if you invest 1 billion VND in software, the actual cost to run the system successfully can range from 2.5 to 5 billion VND including infrastructure, implementation, and training. We offer package pricing that includes both licenses and successful implementation services."
+  },
+  {
+    question: "How does the 3-year TCO (Total Cost of Ownership) estimator work?",
+    answer: "Our estimator combines: (1) Periodic license fees for the number of users over 3 years; (2) Estimated implementation costs based on user scale and industry complexity (e.g. Manufacturing and Healthcare have higher complexity multipliers); (3) Ongoing training, maintenance, and technical support fees. This provides the most realistic budgeting picture."
+  },
+  {
+    question: "What is the average implementation timeline for each tier?",
+    answer: "For the Starter tier (Tier 1), deployment is fast, taking 2 - 4 months as standard processes are applied immediately. The Growth tier (Tier 2) requires 4 - 8 months depending on modules and automation needs. The Enterprise tier (Tier 3) for large conglomerates takes 8 - 18 months due to multi-country processes and numerous integrations."
+  },
+  {
+    question: "Can our business self-implement to save costs?",
+    answer: "Very difficult and highly risky. ERP projects require deep functional expertise, project management experience, and technical customization skills. Self-implementation often leads to database structure errors, resistance from staff due to lack of training, and project delays that prevent go-live. Partnering with a professional team ensures on-time delivery."
+  }
+];
+
+export const FAQS = FAQS_VI;
+
+export const getFaqs = (lang: "vi" | "en") => {
+  return lang === "vi" ? FAQS_VI : FAQS_EN;
+};
+
 export interface ComparisonFeature {
   name: string;
   saho: { text?: string; check: boolean | "custom" | "partial" };
@@ -163,7 +302,7 @@ export interface ComparisonCategory {
   features: ComparisonFeature[];
 }
 
-export const COMPARISON_CATEGORIES: ComparisonCategory[] = [
+export const COMPARISON_CATEGORIES_VI: ComparisonCategory[] = [
   {
     title: "Phân hệ Cốt lõi (Core Modules)",
     features: [
@@ -250,3 +389,97 @@ export const COMPARISON_CATEGORIES: ComparisonCategory[] = [
     ]
   }
 ];
+
+export const COMPARISON_CATEGORIES_EN: ComparisonCategory[] = [
+  {
+    title: "Core Modules",
+    features: [
+      {
+        name: "Financial Accounting",
+        saho: { check: true, text: "Compliant with VAS / Circular 200" },
+        odoo: { check: "partial", text: "Basic / Localized via partners" },
+        netsuite: { check: "partial", text: "Requires additional configuration" },
+        sap: { check: true, text: "Requires additional configuration" }
+      },
+      {
+        name: "HR & Payroll",
+        saho: { check: true, text: "Built-in VN Labor Law, PIT & Insurance" },
+        odoo: { check: false, text: "Not natively available for VN" },
+        netsuite: { check: false, text: "Not natively available for VN" },
+        sap: { check: false, text: "Requires expensive add-ons" }
+      },
+      {
+        name: "Inventory & Warehouse",
+        saho: { check: true, text: "Multi-warehouse, FIFO, LIFO, Batch/Expiry" },
+        odoo: { check: true, text: "Built-in" },
+        netsuite: { check: true, text: "Built-in" },
+        sap: { check: true, text: "Built-in" }
+      },
+      {
+        name: "Production & Bill of Materials (BOM)",
+        saho: { check: true, text: "Multi-level BOM, Production scheduling" },
+        odoo: { check: true, text: "Built-in" },
+        netsuite: { check: true, text: "Requires separate manufacturing module" },
+        sap: { check: true, text: "Built-in" }
+      }
+    ]
+  },
+  {
+    title: "Localization & Support",
+    features: [
+      {
+        name: "Vietnamese E-Invoice Integration",
+        saho: { check: true, text: "Directly connected (MISA, Viettel, VNPT...)" },
+        odoo: { check: "custom", text: "Requires custom development" },
+        netsuite: { check: "custom", text: "Requires custom development" },
+        sap: { check: "custom", text: "Requires partner add-on" }
+      },
+      {
+        name: "Technical Support & Consulting",
+        saho: { check: true, text: "Direct from vendor, fast Onsite support" },
+        odoo: { check: "partial", text: "Via partners / Slow global tickets" },
+        netsuite: { check: "partial", text: "Via exclusive partners only" },
+        sap: { check: "partial", text: "Via exclusive partners only" }
+      },
+      {
+        name: "Tax Reporting Export (HTKK)",
+        saho: { check: true, text: "Automatic XML export for direct tax filing" },
+        odoo: { check: false, text: "Must be done manually externally" },
+        netsuite: { check: false, text: "Must be done manually externally" },
+        sap: { check: "custom", text: "Requires customized custom reporting" }
+      }
+    ]
+  },
+  {
+    title: "Total Cost of Ownership (TCO) Optimization",
+    features: [
+      {
+        name: "Software License Cost",
+        saho: { check: true, text: "Localized pricing optimized for VN" },
+        odoo: { check: "partial", text: "Medium (Hidden fees per App)" },
+        netsuite: { check: false, text: "Very high (Global USD pricing)" },
+        sap: { check: false, text: "Very high (Global USD pricing)" }
+      },
+      {
+        name: "Implementation Cost",
+        saho: { check: true, text: "Low - Medium (Pre-packaged template processes)" },
+        odoo: { check: "partial", text: "Medium (Depends on partner capability)" },
+        netsuite: { check: false, text: "Extremely high (2-3x license fee)" },
+        sap: { check: false, text: "Extremely high (3-4x license fee)" }
+      },
+      {
+        name: "Average Go-live Time",
+        saho: { check: true, text: "Fast (1 - 3 months using industry templates)" },
+        odoo: { check: "partial", text: "Medium (3 - 6 months)" },
+        netsuite: { check: false, text: "Slow (6 - 12 months)" },
+        sap: { check: false, text: "Slow (6 - 12 months)" }
+      }
+    ]
+  }
+];
+
+export const COMPARISON_CATEGORIES = COMPARISON_CATEGORIES_VI;
+
+export const getComparisonCategories = (lang: "vi" | "en") => {
+  return lang === "vi" ? COMPARISON_CATEGORIES_VI : COMPARISON_CATEGORIES_EN;
+};

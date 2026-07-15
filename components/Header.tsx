@@ -1,13 +1,19 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Terminal, Menu, X, ArrowRight, Sun, Moon } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { Terminal, Menu, X, ArrowRight, Sun, Moon, Globe } from "lucide-react";
+import { useLanguage } from "@/components/LanguageProvider";
+import { TRANSLATIONS } from "@/common/translations";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [theme, setTheme] = useState("light");
+  const { language, setLanguage } = useLanguage();
+  const pathname = usePathname();
+  const router = useRouter();
 
   // Sync theme with local storage on mount (Default to Light Mode)
   useEffect(() => {
@@ -31,12 +37,14 @@ export default function Header() {
     }
   };
 
+  const t = TRANSLATIONS[language];
+
   const navItems = [
-    { id: "calculator", label: "Bộ Tính Chi Phí TCO" },
-    { id: "tiers", label: "Gói Dịch Vụ ERP" },
-    { id: "comparison", label: "So Sánh ERP" },
-    { id: "breakdown", label: "Cơ Cấu Đầu Tư" },
-    { id: "faq", label: "Hỏi Đáp (FAQ)" },
+    { id: "calculator", label: t.tcoCalculator },
+    { id: "tiers", label: t.pricingPackages },
+    { id: "comparison", label: t.comparison },
+    { id: "breakdown", label: t.breakdown },
+    { id: "faq", label: t.faq },
   ];
 
   // Scroll handler for background color change
@@ -54,6 +62,8 @@ export default function Header() {
 
   // IntersectionObserver to spy on scroll positions
   useEffect(() => {
+    if (pathname !== "/") return;
+
     const observerOptions = {
       root: null,
       rootMargin: "-30% 0px -50% 0px", // Trigger when section occupies the viewport center
@@ -81,22 +91,48 @@ export default function Header() {
         if (element) observer.unobserve(element);
       });
     };
-  }, []);
+  }, [pathname]);
+
+  // Smooth scroll to hash element on routing changes
+  useEffect(() => {
+    if (pathname === "/" && window.location.hash) {
+      const hash = window.location.hash.substring(1);
+      const timer = setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          const headerOffset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+          setActiveSection(hash);
+        }
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [pathname]);
 
   const scrollToSection = (id: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      // Offset scroll to account for sticky header height
-      const headerOffset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    if (pathname === "/") {
+      const element = document.getElementById(id);
+      if (element) {
+        // Offset scroll to account for sticky header height
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-      setActiveSection(id);
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+        setActiveSection(id);
+      }
+    } else {
+      router.push(`/#${id}`);
     }
   };
 
@@ -111,7 +147,13 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => {
+            if (pathname === "/") {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            } else {
+              router.push("/");
+            }
+          }}>
             <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-blue-500 to-amber-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/25">
               <Terminal className="w-5 h-5" />
             </div>
@@ -152,7 +194,17 @@ export default function Header() {
           </nav>
 
           {/* Action Button */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
+            {/* Language Switcher for Desktop */}
+            <button
+              onClick={() => setLanguage(language === "vi" ? "en" : "vi")}
+              className="px-2.5 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-xs font-black text-zinc-700 dark:text-zinc-300 transition-colors flex items-center gap-1 cursor-pointer uppercase shadow-sm"
+              aria-label="Change Language"
+            >
+              <Globe className="w-3.5 h-3.5 text-zinc-500" />
+              <span>{language}</span>
+            </button>
+
             {/* Theme Toggle Button for Desktop */}
             <button
               onClick={toggleTheme}
@@ -166,13 +218,23 @@ export default function Header() {
               onClick={() => scrollToSection("contact")}
               className="relative inline-flex items-center gap-1.5 text-sm font-semibold bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-950 px-5 py-2.5 rounded-xl transition-all duration-300 shadow-md shadow-zinc-950/10 dark:shadow-white/5 group overflow-hidden cursor-pointer"
             >
-              Đăng Ký Tư Vấn
+              {t.contactBtn}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
 
           {/* Mobile Actions Container */}
           <div className="flex items-center gap-2 md:hidden">
+            {/* Language Switcher for Mobile */}
+            <button
+              onClick={() => setLanguage(language === "vi" ? "en" : "vi")}
+              className="p-2 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-[10px] font-black text-zinc-700 dark:text-zinc-300 transition-colors flex items-center gap-0.5 cursor-pointer uppercase"
+              aria-label="Change Language"
+            >
+              <Globe className="w-3 h-3 text-zinc-550" />
+              <span>{language}</span>
+            </button>
+
             {/* Theme Toggle Button for Mobile */}
             <button
               onClick={toggleTheme}
@@ -218,7 +280,7 @@ export default function Header() {
             onClick={() => scrollToSection("contact")}
             className="w-full flex items-center justify-center gap-1.5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-md shadow-indigo-600/10 transition-colors cursor-pointer"
           >
-            Đăng Ký Tư Vấn
+            {t.contactBtn}
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>

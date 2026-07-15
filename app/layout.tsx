@@ -24,6 +24,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { LanguageProvider } from "@/components/LanguageProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -54,7 +56,11 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
+        </SmoothScroll>
       </body>
     </html>
   );
