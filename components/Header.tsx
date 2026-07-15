@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { Terminal, Menu, X, ArrowRight, Sun, Moon, Globe, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
@@ -15,6 +15,14 @@ export default function Header() {
   const { language, setLanguage } = useLanguage();
   const pathname = usePathname();
   const router = useRouter();
+
+  const supportedLanguages = useMemo(() => {
+    return Object.keys(TRANSLATIONS).map((code) => ({
+      code,
+      label: TRANSLATIONS[code].meta.label,
+      flag: TRANSLATIONS[code].meta.flag,
+    }));
+  }, []);
 
   // Close language dropdown on outside click
   useEffect(() => {
@@ -227,12 +235,7 @@ export default function Header() {
               {/* Dropdown Options */}
               {isLangDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-36 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-1.5 shadow-xl flex flex-col gap-0.5 z-50 animate-fade-in">
-                  {[
-                    { code: "vi", label: "Tiếng Việt", flag: "🇻🇳" },
-                    { code: "en", label: "English", flag: "🇺🇸" },
-                    { code: "es", label: "Español", flag: "🇪🇸" },
-                    { code: "ja", label: "日本語", flag: "🇯🇵" }
-                  ].map((lang) => (
+                  {supportedLanguages.map((lang) => (
                     <button
                       key={lang.code}
                       onClick={() => {
@@ -287,12 +290,7 @@ export default function Header() {
               {/* Dropdown Options */}
               {isLangDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-32 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-1.5 shadow-xl flex flex-col gap-0.5 z-50 animate-fade-in">
-                  {[
-                    { code: "vi", label: "Tiếng Việt", flag: "🇻🇳" },
-                    { code: "en", label: "English", flag: "🇺🇸" },
-                    { code: "es", label: "Español", flag: "🇪🇸" },
-                    { code: "ja", label: "日本語", flag: "🇯🇵" }
-                  ].map((lang) => (
+                  {supportedLanguages.map((lang) => (
                     <button
                       key={lang.code}
                       onClick={() => {
