@@ -1,21 +1,20 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Check, ArrowRight, ShieldCheck, Zap, Globe, Sparkles } from "lucide-react";
 import { getPricingTiers, PricingTier } from "../common/constants";
 import { useLanguage } from "@/components/LanguageProvider";
 import { TRANSLATIONS } from "@/common/translations";
-import { formatUSD, formatVND } from "../common/utils";
+import { formatPriceByLang } from "../common/utils";
 
 export default function PricingTiers() {
-  const [currency, setCurrency] = useState<"USD" | "VND">("USD");
   const { language } = useLanguage();
   const t = TRANSLATIONS[language];
 
   const pricingTiers = useMemo(() => getPricingTiers(language), [language]);
 
   const formatPrice = (value: number) => {
-    return currency === "USD" ? formatUSD(value, true) : formatVND(value, true);
+    return formatPriceByLang(value, language, true);
   };
 
   const handleSelectPlan = (tierId: string) => {
@@ -58,30 +57,7 @@ export default function PricingTiers() {
             </p>
           </div>
           
-          {/* Currency Toggle */}
-          <div className="flex items-center gap-2 p-1.5 bg-zinc-100 dark:bg-zinc-900 rounded-2xl border border-zinc-200/50 dark:border-zinc-800/50 self-start md:self-auto">
-            <button
-              onClick={() => setCurrency("USD")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                currency === "USD"
-                  ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white shadow-sm"
-                  : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200"
-              }`}
-            >
-              USD ($)
-            </button>
-            <button
-              onClick={() => setCurrency("VND")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                currency === "VND"
-                  ? "bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white shadow-sm"
-                  : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200"
-              }`}
-            >
-              VNĐ (đ)
-            </button>
           </div>
-        </div>
 
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
@@ -137,10 +113,10 @@ export default function PricingTiers() {
                       <span className={`text-3xl sm:text-4xl font-black tracking-tight ${isPopular ? "text-white" : "text-zinc-900 dark:text-white"}`}>
                         {formatPrice(tier.basePriceMin)} - {formatPrice(tier.basePriceMax)}
                       </span>
-                      <span className={`text-xs font-semibold ${isPopular ? "text-zinc-400" : "text-zinc-500"}`}>/ user / {language === "vi" ? "tháng" : "month"}</span>
+                      <span className={`text-xs font-semibold ${isPopular ? "text-zinc-400" : "text-zinc-500"}`}>{t.currencyUnitUserMonth}</span>
                     </div>
                     <div className={`text-[11px] font-medium ${isPopular ? "text-zinc-400" : "text-zinc-500"}`}>
-                      {language === "vi" ? "Chi phí triển khai: " : "Implementation cost: "} <span className={`font-bold ${isPopular ? "text-amber-400" : "text-zinc-700 dark:text-zinc-300"}`}>{formatPrice(tier.implementationMin)} - {formatPrice(tier.implementationMax)}</span>
+                      {t.implementationCostLabel} <span className={`font-bold ${isPopular ? "text-amber-400" : "text-zinc-700 dark:text-zinc-300"}`}>{formatPrice(tier.implementationMin)} - {formatPrice(tier.implementationMax)}</span>
                     </div>
                   </div>
 

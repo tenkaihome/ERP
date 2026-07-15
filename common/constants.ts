@@ -191,10 +191,189 @@ export const PRICING_TIERS_EN: PricingTier[] = [
   }
 ];
 
+export const PRICING_TIERS_ES: PricingTier[] = [
+  {
+    id: "starter",
+    name: "Tier 1 - Starter",
+    subtitle: "Para Pequeñas y Medianas Empresas (Pymes)",
+    badge: "Inicio Rápido",
+    basePriceMin: 10,
+    basePriceMax: 50,
+    standardPrice: 20,
+    implementationMin: 15000,
+    implementationMax: 80000,
+    minUsers: 10,
+    maxUsers: 100,
+    targetDescription: "Adecuado para startups, tiendas minoristas, restaurantes, hoteles y pequeñas empresas en fases iniciales de transformación digital.",
+    targetDetails: [
+      "Tamaño de personal: 10 - 100 empleados",
+      "Presupuesto optimizado, implementación rápida",
+      "Procesos operativos simples"
+    ],
+    features: [
+      "HR | Gestión básica de perfiles y selección",
+      "FA | Contabilidad básica, ingresos, gastos y beneficios",
+      "SC | Inventario simple, compras y ventas",
+      "CR | CRM básico y relación con clientes",
+      "Soporte por Email y Chat grupal en horario comercial"
+    ],
+    referenceSystems: "Odoo / MS Business Central Basic",
+  },
+  {
+    id: "growth",
+    name: "Tier 2 - Growth",
+    subtitle: "Solución para Medianas y Grandes Empresas",
+    badge: "Más Popular",
+    basePriceMin: 50,
+    basePriceMax: 150,
+    standardPrice: 80,
+    implementationMin: 50000,
+    implementationMax: 200000,
+    minUsers: 100,
+    maxUsers: 1000,
+    targetDescription: "Adecuado para grandes cadenas minoristas, plantas de fabricación, empresas de logística, hospitales y escuelas que necesitan optimización integral.",
+    targetDetails: [
+      "Tamaño de personal: 100 - 1000 empleados",
+      "Procesos estandarizados listos para automatización",
+      "Modelo operativo multi-empresa"
+    ],
+    features: [
+      "HR, FA, SC, CR avanzado e integral",
+      "Gestión multi-empresa y consolidación de datos",
+      "Automatización de flujos de trabajo (Workflow)",
+      "Reportes de gestión dinámicos y analítica profunda",
+      "Integración de API con sistemas existentes",
+      "Soporte técnico 24/7 con SLA comprometido"
+    ],
+    referenceSystems: "NetSuite / MS Dynamics 365 BC Premium",
+    popular: true,
+  },
+  {
+    id: "enterprise",
+    name: "Tier 3 - Enterprise",
+    subtitle: "Para Conglomerados y Grandes Corporativos",
+    badge: "Ilimitado",
+    basePriceMin: 150,
+    basePriceMax: 400,
+    standardPrice: 200,
+    implementationMin: 150000,
+    implementationMax: 800000,
+    minUsers: 1000,
+    maxUsers: 5000,
+    targetDescription: "Diseñado a medida para grupos industriales diversos, bancos, petróleo y gas, telecomunicaciones o proyectos de inversión pública.",
+    targetDetails: [
+      "Tamaño de personal: Más de 1000 empleados",
+      "Estructura organizativa multi-país compleja",
+      "Requisitos de alto cumplimiento y seguridad absoluta"
+    ],
+    features: [
+      "HR, FA, SC, CR hecho a medida y altamente personalizado",
+      "ERP completo integrado en cada rincón operativo",
+      "AI & BI (Inteligencia Artificial y Reportes Inteligentes de Predicción)",
+      "Gestión multi-país (Multilingüe, multi-moneda, multi-GAAP)",
+      "Cumplimiento estricto de estándares internacionales (Security & Compliance)",
+      "Equipo de soporte dedicado en sitio 24/7"
+    ],
+    referenceSystems: "SAP S/4HANA / Oracle Cloud ERP / Infor",
+  }
+];
+
+export const PRICING_TIERS_JA: PricingTier[] = [
+  {
+    id: "starter",
+    name: "Tier 1 - Starter",
+    subtitle: "中小企業（SMB）向け",
+    badge: "クイックスタート",
+    basePriceMin: 10,
+    basePriceMax: 50,
+    standardPrice: 20,
+    implementationMin: 15000,
+    implementationMax: 80000,
+    minUsers: 10,
+    maxUsers: 100,
+    targetDescription: "スタートアップ、小売店、飲食店、ホテル、およびデジタルトランスフォーメーションの初期段階にある小規模企業に適しています。",
+    targetDetails: [
+      "スタッフ規模：10〜100名",
+      "予算の最適化、迅速な導入",
+      "シンプルな業務プロセス"
+    ],
+    features: [
+      "HR | 基本的なプロフィールおよび採用管理",
+      "FA | 基本的な収支、利益管理、および会計機能",
+      "SC | シンプルな在庫、購買、販売管理",
+      "CR | 基本的なCRMおよび顧客関係管理",
+      "営業時間内における電子メールおよびグループチャットによるサポート"
+    ],
+    referenceSystems: "Odoo / MS Business Central Basic",
+  },
+  {
+    id: "growth",
+    name: "Tier 2 - Growth",
+    subtitle: "中堅・大手企業向けソリューション",
+    badge: "最も人気",
+    basePriceMin: 50,
+    basePriceMax: 150,
+    standardPrice: 80,
+    implementationMin: 50000,
+    implementationMax: 200000,
+    minUsers: 100,
+    maxUsers: 1000,
+    targetDescription: "大規模な小売チェーン、製造工場、物流企業、病院、学校など、包括的な最適化を必要とする企業に適しています。",
+    targetDetails: [
+      "スタッフ規模：100〜1000名",
+      "自動化に対応した標準化されたプロセス",
+      "複数法人（マルチカンパニー）運用モデル"
+    ],
+    features: [
+      "HR、FA、SC、CRの高度かつ包括的な機能",
+      "複数法人管理およびデータ統合",
+      "ワークフローの自動化",
+      "動的な管理レポートと詳細な分析分析",
+      "既存システムとのAPI統合",
+      "SLAを約束した24時間365日のテクニカルサポート"
+    ],
+    referenceSystems: "NetSuite / MS Dynamics 365 BC Premium",
+    popular: true,
+  },
+  {
+    id: "enterprise",
+    name: "Tier 3 - Enterprise",
+    subtitle: "複合企業および大企業向け",
+    badge: "無制限",
+    basePriceMin: 150,
+    basePriceMax: 400,
+    standardPrice: 200,
+    implementationMin: 150000,
+    implementationMax: 800000,
+    minUsers: 1000,
+    maxUsers: 5000,
+    targetDescription: "多角的な業界グループ、銀行、石油・ガス、電気通信、国営企業、または公共投資プロジェクト向けにカスタマイズされています。",
+    targetDetails: [
+      "スタッフ規模：1000名以上",
+      "複雑な多国籍組織構造",
+      "高いコンプライアンス要件と絶対的なセキュリティ"
+    ],
+    features: [
+      "HR、FA、SC、CRのカスタムメイドおよび高度なカスタマイズ",
+      "すべての運用部門に統合されたフルERP",
+      "AI & BI（人工知能とスマート予測レポート）",
+      "多国籍管理（多言語、多通貨、マルチGAAP対応）",
+      "国際標準への厳格な準拠（セキュリティ＆コンプライアンス）",
+      "24時間365日の専任オンサイトサポートチーム"
+    ],
+    referenceSystems: "SAP S/4HANA / Oracle Cloud ERP / Infor",
+  }
+];
+
 export const PRICING_TIERS = PRICING_TIERS_VI;
 
-export const getPricingTiers = (lang: "vi" | "en") => {
-  return lang === "vi" ? PRICING_TIERS_VI : PRICING_TIERS_EN;
+export const getPricingTiers = (lang: "vi" | "en" | "es" | "ja") => {
+  switch (lang) {
+    case "en": return PRICING_TIERS_EN;
+    case "es": return PRICING_TIERS_ES;
+    case "ja": return PRICING_TIERS_JA;
+    default: return PRICING_TIERS_VI;
+  }
 };
 
 export interface Industry {
@@ -226,10 +405,37 @@ export const INDUSTRIES_EN: Industry[] = [
   { id: "conglomerate", name: "Multi-industry Conglomerate", multiplier: 1.45, icon: "Building2" },
 ];
 
+export const INDUSTRIES_ES: Industry[] = [
+  { id: "general", name: "Comercio General y Servicios", multiplier: 1.0, icon: "Briefcase" },
+  { id: "retail", name: "Cadena de Tiendas y Comercio Electrónico", multiplier: 1.15, icon: "ShoppingBag" },
+  { id: "manufacturing", name: "Fabricación y Procesamiento", multiplier: 1.35, icon: "Factory" },
+  { id: "logistics", name: "Transporte y Logística", multiplier: 1.2, icon: "Truck" },
+  { id: "healthcare", name: "Hospitales y Atención Médica", multiplier: 1.4, icon: "Heart" },
+  { id: "education", name: "Escuelas y Educación", multiplier: 1.1, icon: "GraduationCap" },
+  { id: "finance", name: "Finanzas y Banca", multiplier: 1.5, icon: "DollarSign" },
+  { id: "conglomerate", name: "Conglomerado Multiactividad", multiplier: 1.45, icon: "Building2" },
+];
+
+export const INDUSTRIES_JA: Industry[] = [
+  { id: "general", name: "一般商取引・サービス業", multiplier: 1.0, icon: "Briefcase" },
+  { id: "retail", name: "小売チェーン・EC業", multiplier: 1.15, icon: "ShoppingBag" },
+  { id: "manufacturing", name: "製造・加工業", multiplier: 1.35, icon: "Factory" },
+  { id: "logistics", name: "運輸・物流業", multiplier: 1.2, icon: "Truck" },
+  { id: "healthcare", name: "病院・医療業", multiplier: 1.4, icon: "Heart" },
+  { id: "education", name: "学校・教育業", multiplier: 1.1, icon: "GraduationCap" },
+  { id: "finance", name: "金融・銀行業", multiplier: 1.5, icon: "DollarSign" },
+  { id: "conglomerate", name: "多角化コングロマリット", multiplier: 1.45, icon: "Building2" },
+];
+
 export const INDUSTRIES = INDUSTRIES_VI;
 
-export const getIndustries = (lang: "vi" | "en") => {
-  return lang === "vi" ? INDUSTRIES_VI : INDUSTRIES_EN;
+export const getIndustries = (lang: "vi" | "en" | "es" | "ja") => {
+  switch (lang) {
+    case "en": return INDUSTRIES_EN;
+    case "es": return INDUSTRIES_ES;
+    case "ja": return INDUSTRIES_JA;
+    default: return INDUSTRIES_VI;
+  }
 };
 
 export interface FAQ {
@@ -283,10 +489,61 @@ export const FAQS_EN: FAQ[] = [
   }
 ];
 
+export const FAQS_ES: FAQ[] = [
+  {
+    question: "¿Por qué el costo de implementación representa del 30% al 50% del costo total de un proyecto ERP?",
+    answer: "Implementar un ERP no es solo instalar software. Esta tarifa cubre el mapeo de procesos de negocio, consultoría de reingeniería de procesos estandarizados, configuración de parámetros del sistema, programación de informes/formularios personalizados, migración/limpieza de datos, capacitación del personal y soporte en la puesta en marcha en los primeros meses. Sin una implementación adecuada, la tasa de fracaso puede superar el 70%."
+  },
+  {
+    question: "¿Cuánto cuesta la licencia del software en la realidad?",
+    answer: "Las estadísticas del mercado muestran que las tarifas de licencias de software solo representan entre el 20% y el 40% de la inversión inicial total. Esto significa que si invierte 1 millón de USD en software, el costo real para ejecutar el sistema con éxito puede oscilar entre 2.5 y 5 millones de USD, incluyendo infraestructura, implementación y capacitación. Ofrecemos precios de paquete que incluyen tanto las licencias como los servicios de implementación exitosa."
+  },
+  {
+    question: "¿Cómo funciona la calculadora de estimación de TCO a 3 años?",
+    answer: "Nuestra herramienta de estimación combina: (1) Tarifas de licencias periódicas por el número de usuarios durante 3 años; (2) Costos estimados de implementación basados en la escala de usuarios y la complejidad de la industria (por ejemplo, Manufactura y Salud tienen multiplicadores de complejidad más altos); (3) Tarifas de capacitación continua, mantenimiento y soporte técnico. Esto proporciona la imagen presupuestaria más realista."
+  },
+  {
+    question: "¿Cuál es el tiempo promedio de implementación para cada nivel?",
+    answer: "Para el nivel Starter (Tier 1), la implementación es rápida y toma de 2 a 4 meses, ya que los procesos estandarizados se aplican de inmediato. El nivel Growth (Tier 2) requiere de 4 a 8 meses, dependiendo de los módulos y las necesidades de automatización. El nivel Enterprise (Tier 3) para grandes conglomerados toma de 8 a 18 meses debido a los procesos multi-país y a las numerosas integraciones."
+  },
+  {
+    question: "¿Puede nuestra empresa realizar la auto-implementación para ahorrar costos?",
+    answer: "Muy difícil y altamente arriesgado. Los proyectos ERP requieren una profunda experiencia funcional, experiencia en gestión de proyectos y habilidades de personalización técnica. La auto-implementación a menudo conduce a errores en la estructura de la base de datos, resistencia del personal debido a la falta de capacitación y demoras en el proyecto que impiden la puesta en marcha. Asociarse con un equipo profesional garantiza una entrega a tiempo."
+  }
+];
+
+export const FAQS_JA: FAQ[] = [
+  {
+    question: "なぜ導入費用がERPプロジェクトの総コストの30%〜50%を占めるのですか？",
+    answer: "ERPの導入は単にソフトウェアをインストールするだけではありません。この費用には、ビジネスプロセスのマッピング、標準化されたプロセスの再設計コンサルティング、システムパラメータの設定、カスタムレポート/フォームの開発、データの移行/クレンジング、スタッフのトレーニング、および最初の数ヶ月間の本番稼働サポートが含まれます。適切な導入が行われない場合、失敗率は70%を超える可能性があります。"
+  },
+  {
+    question: "実際のところ、ソフトウェアのライセンス費用はどれくらいかかりますか？",
+    answer: "市場統計によると、ソフトウェアのライセンス費用は初期投資全体の20%〜40%にすぎません。つまり、ソフトウェアに1億円を投資した場合、インフラ、導入、トレーニングを含め、システムを正常に稼働させるための実際のコストは2.5億〜5億円になる可能性があります。当社はライセンスと導入サービスの両方を含んだパッケージ料金を提供しています。"
+  },
+  {
+    question: "3年間のTCO（総所有コスト）予測ツールはどのように機能しますか？",
+    answer: "当社の予測ツールは以下を組み合わせています：(1) 3年間のユーザー数に応じた定期的なライセンス費用；(2) ユーザーの規模と業界の複雑さ（製造業や医療業は複雑性乗数が高くなります）に基づく推定導入費用；(3) 継続的なトレーニング、メンテナンス、およびテクニカルサポート費用。これにより、最も現実的な予算計画が提供されます。"
+  },
+  {
+    question: "各パッケージの平均的な導入期間はどのくらいですか？",
+    answer: "スターター（Tier 1）の場合、標準プロセスをそのまま適用するため、導入は迅速で2〜4ヶ月かかります。グロース（Tier 2）は、モジュールや自動化の要件に応じて4〜8ヶ月必要です。大企業向けのエンタープライズ（Tier 3）は、多国籍プロセスと多数のシステム連携のため、8〜18ヶ月かかります。"
+  },
+  {
+    question: "コストを削減するために自社で導入することはできますか？",
+    answer: "非常に困難であり、リスクが極めて高いです。ERPプロジェクトには、深い業務知識、プロジェクト管理の経験、および技術的なカスタマイズスキルが必要です。自社導入は、データベース構造のエラー、トレーニング不足による現場の反発、プロジェクトの遅延などを招きやすく、稼働に至らないケースが多くあります。専門のパートナーチームと協力することが、計画通りの稼働を保証します。"
+  }
+];
+
 export const FAQS = FAQS_VI;
 
-export const getFaqs = (lang: "vi" | "en") => {
-  return lang === "vi" ? FAQS_VI : FAQS_EN;
+export const getFaqs = (lang: "vi" | "en" | "es" | "ja") => {
+  switch (lang) {
+    case "en": return FAQS_EN;
+    case "es": return FAQS_ES;
+    case "ja": return FAQS_JA;
+    default: return FAQS_VI;
+  }
 };
 
 export interface ComparisonFeature {
@@ -478,8 +735,189 @@ export const COMPARISON_CATEGORIES_EN: ComparisonCategory[] = [
   }
 ];
 
+export const COMPARISON_CATEGORIES_ES: ComparisonCategory[] = [
+  {
+    title: "Módulos Principales (Core Modules)",
+    features: [
+      {
+        name: "Financial Accounting (Contabilidad financiera)",
+        saho: { check: true, text: "Cumple con VAS / Circular 200" },
+        odoo: { check: "partial", text: "Básico / Localizado por socios" },
+        netsuite: { check: "partial", text: "Requiere configuración adicional" },
+        sap: { check: true, text: "Requiere configuración adicional" }
+      },
+      {
+        name: "HR & Payroll (Recursos Humanos y Nómina)",
+        saho: { check: true, text: "Ley Laboral VN integrada, IRPF y Seguridad Social" },
+        odoo: { check: false, text: "No disponible de forma nativa para VN" },
+        netsuite: { check: false, text: "No disponible de forma nativa para VN" },
+        sap: { check: false, text: "Requiere complementos costosos" }
+      },
+      {
+        name: "Inventory & Warehouse (Inventario y Almacén)",
+        saho: { check: true, text: "Multi-almacén, FIFO, LIFO, lote/caducidad" },
+        odoo: { check: true, text: "Integrado por defecto" },
+        netsuite: { check: true, text: "Integrado por defecto" },
+        sap: { check: true, text: "Integrado por defecto" }
+      },
+      {
+        name: "Production Management (Producción y Lista de Materiales)",
+        saho: { check: true, text: "BOM multinivel, programación de producción" },
+        odoo: { check: true, text: "Integrado por defecto" },
+        netsuite: { check: true, text: "Módulo de producción de pago adicional" },
+        sap: { check: true, text: "Integrado por defecto" }
+      }
+    ]
+  },
+  {
+    title: "Localización y Soporte (Localization & Support)",
+    features: [
+      {
+        name: "Vietnamese E-Invoice (Factura Electrónica VN)",
+        saho: { check: true, text: "Conexión directa (MISA, Viettel, VNPT...)" },
+        odoo: { check: "custom", text: "Requiere desarrollo personalizado" },
+        netsuite: { check: "custom", text: "Requiere desarrollo personalizado" },
+        sap: { check: "custom", text: "Requiere complementos del socio" }
+      },
+      {
+        name: "Soporte Técnico y Consultoría",
+        saho: { check: true, text: "Directo del fabricante, soporte in situ rápido" },
+        odoo: { check: "partial", text: "Vía socios / Tickets globales lentos" },
+        netsuite: { check: "partial", text: "Vía socios exclusivos únicamente" },
+        sap: { check: "partial", text: "Vía socios exclusivos únicamente" }
+      },
+      {
+        name: "Exportación de Informes Fiscales (HTKK)",
+        saho: { check: true, text: "Exportación automática XML para declaración directa" },
+        odoo: { check: false, text: "Debe hacerse manualmente de forma externa" },
+        netsuite: { check: false, text: "Debe hacerse manualmente de forma externa" },
+        sap: { check: "custom", text: "Requiere desarrollo de informes a medida" }
+      }
+    ]
+  },
+  {
+    title: "Optimización de Costos (TCO Optimization)",
+    features: [
+      {
+        name: "Costo de Licencia de Software",
+        saho: { check: true, text: "Precios localizados optimizados para VN" },
+        odoo: { check: "partial", text: "Medio (tarifas ocultas por aplicación)" },
+        netsuite: { check: false, text: "Muy alto (precios globales en USD)" },
+        sap: { check: false, text: "Muy alto (precios globales en USD)" }
+      },
+      {
+        name: "Costo de Implementación",
+        saho: { check: true, text: "Bajo - Medio (procesos de plantilla preconfigurados)" },
+        odoo: { check: "partial", text: "Medio (depende de la capacidad del socio)" },
+        netsuite: { check: false, text: "Extremadamente alto (2-3 veces la licencia)" },
+        sap: { check: false, text: "Extremadamente alto (3-4 veces la licencia)" }
+      },
+      {
+        name: "Tiempo Promedio de Puesta en Marcha",
+        saho: { check: true, text: "Rápido (1 - 3 meses usando plantillas de industria)" },
+        odoo: { check: "partial", text: "Medio (3 - 6 meses)" },
+        netsuite: { check: false, text: "Lento (6 - 12 meses)" },
+        sap: { check: false, text: "Lento (6 - 12 meses)" }
+      }
+    ]
+  }
+];
+
+export const COMPARISON_CATEGORIES_JA: ComparisonCategory[] = [
+  {
+    title: "核心モジュール (Core Modules)",
+    features: [
+      {
+        name: "Financial Accounting (財務会計)",
+        saho: { check: true, text: "VAS（ベトナム会計基準）/ 通達200号に準拠" },
+        odoo: { check: "partial", text: "基本機能 / パートナーによるローカライズ" },
+        netsuite: { check: "partial", text: "追加のカスタマイズ設定が必要" },
+        sap: { check: true, text: "追加のカスタマイズ設定が必要" }
+      },
+      {
+        name: "HR & Payroll (人事・給与)",
+        saho: { check: true, text: "ベトナム労働法、個人所得税、社会保険を標準実装" },
+        odoo: { check: false, text: "ベトナム向け標準機能なし" },
+        netsuite: { check: false, text: "ベトナム向け標準機能なし" },
+        sap: { check: false, text: "高額な追加アドオンが必要" }
+      },
+      {
+        name: "Inventory & Warehouse (在庫・倉庫管理)",
+        saho: { check: true, text: "複数倉庫、FIFO、LIFO、ロット/有効期限管理" },
+        odoo: { check: true, text: "標準実装" },
+        netsuite: { check: true, text: "標準実装" },
+        sap: { check: true, text: "標準実装" }
+      },
+      {
+        name: "Production Management (生産・部品表管理)",
+        saho: { check: true, text: "マルチレベルBOM、生産スケジューリング" },
+        odoo: { check: true, text: "標準実装" },
+        netsuite: { check: true, text: "生産管理は有料の追加モジュール" },
+        sap: { check: true, text: "標準実装" }
+      }
+    ]
+  },
+  {
+    title: "ローカライズ & サポート (Localization & Support)",
+    features: [
+      {
+        name: "Vietnamese E-Invoice (ベトナム電子請求書連携)",
+        saho: { check: true, text: "直接連携 (MISA, Viettel, VNPTなど)" },
+        odoo: { check: "custom", text: "個別カスタマイズ開発が必要" },
+        netsuite: { check: "custom", text: "個別カスタマイズ開発が必要" },
+        sap: { check: "custom", text: "パートナー経由のアドオン購入が必要" }
+      },
+      {
+        name: "テクニカルサポート＆導入コンサル",
+        saho: { check: true, text: "メーカーからの直接対応、迅速なオンサイトサポート" },
+        odoo: { check: "partial", text: "パートナー経由 / グローバルチケット対応のため遅い" },
+        netsuite: { check: "partial", text: "専任パートナー経由のみ" },
+        sap: { check: "partial", text: "専任パートナー経由のみ" }
+      },
+      {
+        name: "税務申告データ出力 (HTKK)",
+        saho: { check: true, text: "直接申告可能なXMLデータの自動出力対応" },
+        odoo: { check: false, text: "外部での手動処理が必要" },
+        netsuite: { check: false, text: "外部での手動処理が必要" },
+        sap: { check: "custom", text: "個別レポート開発が必要" }
+      }
+    ]
+  },
+  {
+    title: "コスト最適化 (TCO Optimization)",
+    features: [
+      {
+        name: "ソフトウェアライセンス費用",
+        saho: { check: true, text: "ベトナム企業向けに最適化されたローカル価格" },
+        odoo: { check: "partial", text: "普通 (アプリ数ごとの隠れた追加費用あり)" },
+        netsuite: { check: false, text: "非常に高い (グローバル共通USD価格)" },
+        sap: { check: false, text: "非常に高い (グローバル共通USD価格)" }
+      },
+      {
+        name: "システム導入費用",
+        saho: { check: true, text: "低〜中（事前パッケージ化された業務テンプレート）" },
+        odoo: { check: "partial", text: "中（パートナー企業のスキルに依存）" },
+        netsuite: { check: false, text: "極めて高い (ライセンス費用の2〜3倍)" },
+        sap: { check: false, text: "極めて高い (ライセンス費用の3〜4倍)" }
+      },
+      {
+        name: "平均稼働期間",
+        saho: { check: true, text: "迅速（業務テンプレート活用により1〜3ヶ月）" },
+        odoo: { check: "partial", text: "中程度 (3〜6ヶ月)" },
+        netsuite: { check: false, text: "遅い (6〜12ヶ月)" },
+        sap: { check: false, text: "遅い (6〜12ヶ月)" }
+      }
+    ]
+  }
+];
+
 export const COMPARISON_CATEGORIES = COMPARISON_CATEGORIES_VI;
 
-export const getComparisonCategories = (lang: "vi" | "en") => {
-  return lang === "vi" ? COMPARISON_CATEGORIES_VI : COMPARISON_CATEGORIES_EN;
+export const getComparisonCategories = (lang: "vi" | "en" | "es" | "ja") => {
+  switch (lang) {
+    case "en": return COMPARISON_CATEGORIES_EN;
+    case "es": return COMPARISON_CATEGORIES_ES;
+    case "ja": return COMPARISON_CATEGORIES_JA;
+    default: return COMPARISON_CATEGORIES_VI;
+  }
 };

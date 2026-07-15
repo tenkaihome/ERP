@@ -39,15 +39,7 @@ export default function HeroSection() {
 
         {/* Description */}
         <p className="max-w-3xl mx-auto text-lg text-zinc-650 dark:text-zinc-300 leading-relaxed">
-          {language === "vi" ? (
-            <>
-              Nhiều doanh nghiệp thất bại khi chỉ quan tâm tới giá mua phần mềm (License). Thực tế, bản quyền chỉ chiếm <strong className="text-indigo-600 dark:text-indigo-400 font-semibold">20% - 40%</strong> tổng đầu tư. <strong className="text-amber-500 font-semibold">30% - 50%</strong> ngân sách quyết định sự thành bại nằm ở khâu <strong className="underline decoration-amber-500/50 underline-offset-4">Triển Khai & Vận Hành</strong>.
-            </>
-          ) : (
-            <>
-              Many businesses fail by only focusing on software license costs. In reality, license fees only account for <strong className="text-indigo-600 dark:text-indigo-400 font-semibold">20% - 40%</strong> of the total investment. <strong className="text-amber-500 font-semibold">30% - 50%</strong> of the budget that determines success or failure lies in <strong className="underline decoration-amber-500/50 underline-offset-4">Implementation & Operations</strong>.
-            </>
-          )}
+          {t.heroDesc}
         </p>
 
         {/* CTA Buttons */}
@@ -80,28 +72,28 @@ export default function HeroSection() {
             <div 
               className="bg-indigo-600 flex items-center justify-center transition-all duration-500 hover:opacity-90"
               style={{ width: "30%" }}
-              title={language === "vi" ? "Bản quyền phần mềm (License) chiếm ~30% ngân sách" : "Software license accounts for ~30% budget"}
+              title={t.tco30Title}
             >
               <span>{t.licenseLabel}</span>
             </div>
             <div 
               className="bg-amber-500 flex items-center justify-center text-zinc-950 transition-all duration-500 hover:opacity-90"
               style={{ width: "40%" }}
-              title={language === "vi" ? "Dịch vụ triển khai (Implementation) chiếm ~40% ngân sách" : "Implementation services account for ~40% budget"}
+              title={t.tco40Title}
             >
               <span>{t.implementationLabel}</span>
             </div>
             <div 
               className="bg-emerald-600 flex items-center justify-center transition-all duration-500 hover:opacity-90"
               style={{ width: "15%" }}
-              title={language === "vi" ? "Đào tạo nhân sự và Chuyển đổi số (Training) chiếm ~15% ngân sách" : "Staff training and digital adoption accounts for ~15% budget"}
+              title={t.tco15Title}
             >
               <span>{t.trainingLabel}</span>
             </div>
             <div 
               className="bg-zinc-500 flex items-center justify-center transition-all duration-500 hover:opacity-90"
               style={{ width: "15%" }}
-              title={language === "vi" ? "Vận hành, nâng cấp & bảo trì (Ongoing Maintenance) chiếm ~15% ngân sách" : "Operations, maintenance & upgrades account for ~15% budget"}
+              title={t.tcoOngoingTitle}
             >
               <span>{t.supportLabel}</span>
             </div>

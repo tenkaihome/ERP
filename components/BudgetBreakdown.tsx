@@ -3,9 +3,11 @@
 import React, { useMemo } from "react";
 import { Layers, Settings, FileSpreadsheet, GraduationCap, LifeBuoy, AlertCircle } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
+import { TRANSLATIONS } from "@/common/translations";
 
 export default function BudgetBreakdown() {
   const { language } = useLanguage();
+  const t = TRANSLATIONS[language];
 
   const steps = useMemo(() => {
     if (language === "vi") {
@@ -34,6 +36,62 @@ export default function BudgetBreakdown() {
           icon: <LifeBuoy className="w-5 h-5 text-indigo-500" />,
           title: "5. Hỗ trợ Vận hành Thực tế (Hypercare)",
           desc: "Cử kỹ sư giám sát trực tiếp tại văn phòng doanh nghiệp trong 2-4 tuần đầu tiên khi hệ thống go-live để giải quyết tức thời các vướng mắc của nhân viên.",
+        },
+      ];
+    } else if (language === "es") {
+      return [
+        {
+          icon: <Layers className="w-5 h-5 text-indigo-500" />,
+          title: "1. Mapeo de Procesos y Consultoría (Blueprint)",
+          desc: "Los expertos de SAHO trabajan directamente con los jefes de departamento de la empresa para estandarizar los procesos comerciales de compras, logística, finanzas y producción antes de configurarlos en el software.",
+        },
+        {
+          icon: <Settings className="w-5 h-5 text-indigo-500" />,
+          title: "2. Configuración y Personalización del Sistema (Configuration)",
+          desc: "Configuración del catálogo de cuentas contables, permisos de seguridad, personalización de informes financieros, plantillas de facturas y estructuración del sistema según su modelo operativo real.",
+        },
+        {
+          icon: <FileSpreadsheet className="w-5 h-5 text-indigo-500" />,
+          title: "3. Limpieza y Migración de Datos (Migration)",
+          desc: "Asistencia en la extracción de datos heredados de Excel o software contable anterior, depuración de registros duplicados e importación automática en la nueva base de datos del ERP.",
+        },
+        {
+          icon: <GraduationCap className="w-5 h-5 text-indigo-500" />,
+          title: "4. Capacitación del Personal y Pruebas UAT",
+          desc: "Organización de sesiones de capacitación práctica y visual para cada departamento. Creación de manuales de usuario y ejecución de simulacros del sistema (UAT) para la aprobación final.",
+        },
+        {
+          icon: <LifeBuoy className="w-5 h-5 text-indigo-500" />,
+          title: "5. Soporte Post-implementación (Hypercare)",
+          desc: "Despliegue de ingenieros de soporte en las oficinas corporativas durante las primeras 2 a 4 semanas después de la puesta en marcha para resolver de inmediato cualquier duda de los usuarios.",
+        },
+      ];
+    } else if (language === "ja") {
+      return [
+        {
+          icon: <Layers className="w-5 h-5 text-indigo-500" />,
+          title: "1. 業務プロセス分析・設計 (Blueprint)",
+          desc: "SAHOの専門コンサルタントが貴社の各部門長と直接連携し、購買、物流、財務、製造の業務プロセスを整理・標準化した上でシステム設計を行います。",
+        },
+        {
+          icon: <Settings className="w-5 h-5 text-indigo-500" />,
+          title: "2. システム設定＆カスタマイズ (Configuration)",
+          desc: "勘定科目マスタの設定、セキュリティ権限設計、財務レポート・請求書テンプレートのカスタマイズを行い、実際の業務モデルに合わせてシステムを構築します。",
+        },
+        {
+          icon: <FileSpreadsheet className="w-5 h-5 text-indigo-500" />,
+          title: "3. データクレンジング＆移行 (Migration)",
+          desc: "Excelや旧会計システムからのデータ抽出、クレンジング（重複排除・名寄せ）、および新ERPデータベースへの自動インポート作業を支援します。",
+        },
+        {
+          icon: <GraduationCap className="w-5 h-5 text-indigo-500" />,
+          title: "4. 操作トレーニング＆受入テスト (UAT)",
+          desc: "部門ごとに分かりやすい操作研修を実施します。ユーザーマニュアルの作成や、最終検証のための本稼働想定UAT（テスト運用）を主導します。",
+        },
+        {
+          icon: <LifeBuoy className="w-5 h-5 text-indigo-500" />,
+          title: "5. 本稼働直後サポート (Hypercare)",
+          desc: "稼働開始から2〜4週間、エンジニアが貴社のオフィスに常駐し、現場で発生するユーザーからの質問や課題をその場で即座に解決します。",
         },
       ];
     } else {
@@ -75,31 +133,22 @@ export default function BudgetBreakdown() {
           {/* Left Column (5 cols): Explanation & Mindset */}
           <div className="lg:col-span-5 space-y-6">
             <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-3 py-1.5 rounded-full border border-indigo-200/20">
-              {language === "vi" ? "Quy Trình Triển Khai Thực Chất" : "Genuine Implementation Process"}
+              {t.breakdownProcessTitle}
             </span>
             <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white sm:text-4xl leading-tight">
-              {language === "vi" 
-                ? "Chúng Tôi Bàn Giao Quy Trình Vận Hành, Không Phải Đĩa Phần Mềm" 
-                : "We Deliver Operational Processes, Not Software Disks"
-              }
+              {t.breakdownProcessSubtitle}
             </h2>
             <p className="text-base text-zinc-650 dark:text-zinc-400 leading-relaxed">
-              {language === "vi"
-                ? "Mua bản quyền ERP mới chỉ là mua chiếc xe, còn dịch vụ triển khai chính là động cơ và nhiên liệu để chiếc xe lăn bánh an toàn. SAHO cung cấp chuỗi dịch vụ khép kín nhằm cam kết đưa dự án tới ngày nghiệm thu thực tế, loại bỏ hoàn toàn nguy cơ “đắp chiếu” phần mềm."
-                : "Buying a new ERP license is like buying a car; implementation services are the engine and fuel that make the car run safely. SAHO provides an end-to-end chain of services committed to bringing the project to operational go-live, eliminating any software shelving risks."
-              }
+              {t.breakdownProcessParagraph}
             </p>
 
             <div className="p-5 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-zinc-900 dark:text-zinc-300 space-y-3">
               <div className="flex items-center gap-2 font-bold text-amber-600 dark:text-amber-400 text-sm">
                 <AlertCircle className="w-5 h-5 shrink-0" />
-                {language === "vi" ? "Lưu ý quan trọng cho lãnh đạo doanh nghiệp" : "Important note for business leaders"}
+                {t.breakdownLeaderNoteTitle}
               </div>
               <p className="text-xs leading-relaxed">
-                {language === "vi"
-                  ? "Hơn 68% dự án ERP thất bại toàn cầu không phải do lỗi phần mềm, mà do quy trình triển khai thiếu chuẩn hóa và nhân sự vận hành không được đào tạo bài bản. Đầu tư nghiêm túc cho khâu Triển khai là khoản đầu tư đảm bảo thành công cao nhất."
-                  : "Over 68% of ERP project failures worldwide are not due to software errors, but due to unstandardized deployment processes and untrained operations staff. Seriously investing in Implementation is the highest guarantee of project success."
-                }
+                {t.breakdownLeaderNoteText}
               </p>
             </div>
           </div>
@@ -107,7 +156,7 @@ export default function BudgetBreakdown() {
           {/* Right Column (7 cols): List of implementation tasks */}
           <div className="lg:col-span-7 space-y-5">
             <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-4">
-              {language === "vi" ? "5 Hạng Mục Công Việc Nằm Trong Chi Phí Triển Khai" : "5 Key Deliverables Included in Implementation Costs"}
+              {t.breakdownListTitle}
             </h3>
             
             <div className="space-y-4">

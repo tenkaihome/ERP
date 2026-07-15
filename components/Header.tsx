@@ -2,18 +2,35 @@
 
 import React, { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { Terminal, Menu, X, ArrowRight, Sun, Moon, Globe } from "lucide-react";
+import { Terminal, Menu, X, ArrowRight, Sun, Moon, Globe, ChevronDown } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
 import { TRANSLATIONS } from "@/common/translations";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [theme, setTheme] = useState("light");
   const { language, setLanguage } = useLanguage();
   const pathname = usePathname();
   const router = useRouter();
+
+  // Close language dropdown on outside click
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest(".lang-selector-container")) {
+        setIsLangDropdownOpen(false);
+      }
+    };
+    if (isLangDropdownOpen) {
+      window.addEventListener("click", handleOutsideClick);
+    }
+    return () => {
+      window.removeEventListener("click", handleOutsideClick);
+    };
+  }, [isLangDropdownOpen]);
 
   // Sync theme with local storage on mount (Default to Light Mode)
   useEffect(() => {
@@ -196,14 +213,45 @@ export default function Header() {
           {/* Action Button */}
           <div className="hidden md:flex items-center gap-3">
             {/* Language Switcher for Desktop */}
-            <button
-              onClick={() => setLanguage(language === "vi" ? "en" : "vi")}
-              className="px-2.5 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-xs font-black text-zinc-700 dark:text-zinc-300 transition-colors flex items-center gap-1 cursor-pointer uppercase shadow-sm"
-              aria-label="Change Language"
-            >
-              <Globe className="w-3.5 h-3.5 text-zinc-500" />
-              <span>{language}</span>
-            </button>
+            <div className="relative lang-selector-container">
+              <button
+                onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+                className="px-2.5 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-xs font-black text-zinc-700 dark:text-zinc-300 transition-colors flex items-center gap-1.5 cursor-pointer uppercase shadow-sm"
+                aria-label="Change Language"
+              >
+                <Globe className="w-3.5 h-3.5 text-zinc-500" />
+                <span>{language}</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-zinc-400 transition-transform duration-250 ${isLangDropdownOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {/* Dropdown Options */}
+              {isLangDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-36 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-1.5 shadow-xl flex flex-col gap-0.5 z-50 animate-fade-in">
+                  {[
+                    { code: "vi", label: "Tiếng Việt", flag: "🇻🇳" },
+                    { code: "en", label: "English", flag: "🇺🇸" },
+                    { code: "es", label: "Español", flag: "🇪🇸" },
+                    { code: "ja", label: "日本語", flag: "🇯🇵" }
+                  ].map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        setLanguage(lang.code as any);
+                        setIsLangDropdownOpen(false);
+                      }}
+                      className={`w-full text-left px-3 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                        language === lang.code
+                          ? "bg-indigo-50 text-indigo-650 dark:bg-indigo-950/40 dark:text-indigo-400"
+                          : "text-zinc-650 hover:bg-zinc-100 dark:text-zinc-350 dark:hover:bg-zinc-900"
+                      }`}
+                    >
+                      <span className="text-sm leading-none">{lang.flag}</span>
+                      <span>{lang.label}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {/* Theme Toggle Button for Desktop */}
             <button
@@ -226,14 +274,44 @@ export default function Header() {
           {/* Mobile Actions Container */}
           <div className="flex items-center gap-2 md:hidden">
             {/* Language Switcher for Mobile */}
-            <button
-              onClick={() => setLanguage(language === "vi" ? "en" : "vi")}
-              className="p-2 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-[10px] font-black text-zinc-700 dark:text-zinc-300 transition-colors flex items-center gap-0.5 cursor-pointer uppercase"
-              aria-label="Change Language"
-            >
-              <Globe className="w-3 h-3 text-zinc-550" />
-              <span>{language}</span>
-            </button>
+            <div className="relative lang-selector-container">
+              <button
+                onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+                className="p-2 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 text-xs font-black text-zinc-700 dark:text-zinc-300 transition-colors flex items-center gap-1 cursor-pointer uppercase"
+                aria-label="Change Language"
+              >
+                <Globe className="w-3.5 h-3.5 text-zinc-500" />
+                <span>{language}</span>
+              </button>
+
+              {/* Dropdown Options */}
+              {isLangDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-32 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-1.5 shadow-xl flex flex-col gap-0.5 z-50 animate-fade-in">
+                  {[
+                    { code: "vi", label: "Tiếng Việt", flag: "🇻🇳" },
+                    { code: "en", label: "English", flag: "🇺🇸" },
+                    { code: "es", label: "Español", flag: "🇪🇸" },
+                    { code: "ja", label: "日本語", flag: "🇯🇵" }
+                  ].map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => {
+                        setLanguage(lang.code as any);
+                        setIsLangDropdownOpen(false);
+                      }}
+                      className={`w-full text-left px-3 py-2 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                        language === lang.code
+                          ? "bg-indigo-50 text-indigo-650 dark:bg-indigo-950/40 dark:text-indigo-400"
+                          : "text-zinc-650 hover:bg-zinc-100 dark:text-zinc-350 dark:hover:bg-zinc-900"
+                      }`}
+                    >
+                      <span className="text-xs leading-none">{lang.flag}</span>
+                      <span>{lang.label}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {/* Theme Toggle Button for Mobile */}
             <button
