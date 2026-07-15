@@ -65,7 +65,10 @@ export default function CustomSelect({
 
       {/* Options Dropdown List */}
       {isOpen && (
-        <div className="absolute z-30 w-full mt-2 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl max-h-60 overflow-y-auto animate-fade-in divide-y divide-zinc-100 dark:divide-zinc-850">
+        <div
+          data-lenis-prevent
+          className="absolute z-30 w-full mt-2 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl max-h-60 overflow-y-auto custom-scrollbar animate-fade-in divide-y divide-zinc-100 dark:divide-zinc-850"
+        >
           <div className="py-1.5">
             {options.map((option) => {
               const isSelected = option.value === value;
