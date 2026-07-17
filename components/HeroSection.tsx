@@ -70,32 +70,56 @@ export default function HeroSection() {
           
           <div className="flex h-10 rounded-2xl overflow-hidden mb-3 text-white font-bold text-xs select-none shadow-inner">
             <div 
-              className="bg-indigo-600 flex items-center justify-center transition-all duration-500 hover:opacity-90"
+              className="bg-indigo-600 flex items-center justify-center transition-all duration-500 hover:opacity-90 px-1 text-center"
               style={{ width: "30%" }}
               title={t.tco30Title}
             >
-              <span>{t.licenseLabel}</span>
+              <span className="hidden sm:inline">{t.licenseLabel}</span>
+              <span className="inline sm:hidden">30%</span>
             </div>
             <div 
-              className="bg-amber-500 flex items-center justify-center text-zinc-950 transition-all duration-500 hover:opacity-90"
+              className="bg-amber-500 flex items-center justify-center text-zinc-950 transition-all duration-500 hover:opacity-90 px-1 text-center"
               style={{ width: "40%" }}
               title={t.tco40Title}
             >
-              <span>{t.implementationLabel}</span>
+              <span className="hidden sm:inline">{t.implementationLabel}</span>
+              <span className="inline sm:hidden">40%</span>
             </div>
             <div 
-              className="bg-emerald-600 flex items-center justify-center transition-all duration-500 hover:opacity-90"
+              className="bg-emerald-600 flex items-center justify-center transition-all duration-500 hover:opacity-90 px-1 text-center"
               style={{ width: "15%" }}
               title={t.tco15Title}
             >
-              <span>{t.trainingLabel}</span>
+              <span className="hidden sm:inline">{t.trainingLabel}</span>
+              <span className="inline sm:hidden">15%</span>
             </div>
             <div 
-              className="bg-zinc-500 flex items-center justify-center transition-all duration-500 hover:opacity-90"
+              className="bg-zinc-500 flex items-center justify-center transition-all duration-500 hover:opacity-90 px-1 text-center"
               style={{ width: "15%" }}
               title={t.tcoOngoingTitle}
             >
-              <span>{t.supportLabel}</span>
+              <span className="hidden sm:inline">{t.supportLabel}</span>
+              <span className="inline sm:hidden">15%</span>
+            </div>
+          </div>
+
+          {/* Legend for mobile to prevent text overlap */}
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4 sm:hidden text-[11px] font-semibold">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-md bg-indigo-600 shrink-0" />
+              <span className="text-zinc-650 dark:text-zinc-350">{t.licenseLabel}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-md bg-amber-500 shrink-0" />
+              <span className="text-zinc-650 dark:text-zinc-350">{t.implementationLabel}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-md bg-emerald-600 shrink-0" />
+              <span className="text-zinc-650 dark:text-zinc-350">{t.trainingLabel}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-md bg-zinc-500 shrink-0" />
+              <span className="text-zinc-650 dark:text-zinc-350">{t.supportLabel}</span>
             </div>
           </div>
           

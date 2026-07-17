@@ -210,7 +210,7 @@ export default function InteractiveCalculator() {
                     {t.calcResultsTco}
                   </h3>
                   <div className="mt-1 flex flex-col">
-                    <span className="text-4xl sm:text-5xl font-black tracking-tight text-white tabular-nums">
+                    <span className="text-2xl min-[360px]:text-3xl xs:text-4xl sm:text-5xl font-black tracking-tight text-white tabular-nums break-words">
                       {formatPriceByLang(costs.threeYearTco, language)}
                     </span>
                   </div>
@@ -227,7 +227,7 @@ export default function InteractiveCalculator() {
                 {/* Breakdown List */}
                 <div className="space-y-3.5 text-sm">
                   {/* Monthly per User */}
-                  <div className="flex justify-between items-center text-zinc-400">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-zinc-400 gap-1 sm:gap-2">
                     <span className="flex items-center gap-1.5">
                       {t.licenseUnitPriceMonth}
                       <span className="group relative cursor-pointer text-indigo-400 hover:text-indigo-300">
@@ -240,21 +240,21 @@ export default function InteractiveCalculator() {
                         </span>
                       </span>
                     </span>
-                    <span className="font-semibold text-white">
+                    <span className="font-semibold text-white sm:text-right text-sm sm:text-base">
                       {formatPriceByLang(costs.monthlyLicensePerUser, language)} / user
                     </span>
                   </div>
 
                   {/* Total License 3 Years */}
-                  <div className="flex justify-between items-center text-zinc-400">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-zinc-400 gap-1 sm:gap-2">
                     <span>{t.totalLicenses36m}</span>
-                    <span className="font-semibold text-white">
+                    <span className="font-semibold text-white sm:text-right text-sm sm:text-base">
                       {formatPriceByLang(costs.threeYearLicenseTotal, language)}
                     </span>
                   </div>
 
                   {/* Implementation */}
-                  <div className="flex justify-between items-center text-zinc-400">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-zinc-400 gap-1 sm:gap-2">
                     <span className="flex items-center gap-1.5">
                       {t.implementationOneTime}
                       <span className="group relative cursor-pointer text-indigo-400 hover:text-indigo-300">
@@ -263,27 +263,27 @@ export default function InteractiveCalculator() {
                           {language === "vi" && "Khảo sát quy trình, thiết lập hệ thống, import data, lập trình báo cáo. Đã nhân hệ số ngành."}
                           {language === "en" && "Process mapping, system setup, data migration, custom report programming. Adjusted by industry multiplier."}
                           {language === "es" && "Mapeo de procesos, configuración del sistema, migración de datos y programación de informes a medida. Ajustado por multiplicador sectorial."}
-                          {language === "ja" && "業務分析、システム初期設定、データ移行、カスタム帳票開発が含まれます（業界複雑性係数調整済み）。"}
+                          {language === "ja" && "業務分析、システム初期設定、データ移行, カスタm帳票開発が含まれます（業界複雑性係数調整済み）。"}
                         </span>
                       </span>
                     </span>
-                    <span className="font-semibold text-white">
+                    <span className="font-semibold text-white sm:text-right text-sm sm:text-base">
                       {formatPriceByLang(costs.finalImplementation, language)}
                     </span>
                   </div>
 
                   {/* Training */}
-                  <div className="flex justify-between items-center text-zinc-400">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-zinc-400 gap-1 sm:gap-2">
                     <span>{t.calcResultsTraining}</span>
-                    <span className="font-semibold text-white">
+                    <span className="font-semibold text-white sm:text-right text-sm sm:text-base">
                       {formatPriceByLang(costs.trainingCost, language)}
                     </span>
                   </div>
 
                   {/* Support */}
-                  <div className="flex justify-between items-center text-zinc-400">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center text-zinc-400 gap-1 sm:gap-2">
                     <span>{t.maintenanceSupport3y}</span>
-                    <span className="font-semibold text-white">
+                    <span className="font-semibold text-white sm:text-right text-sm sm:text-base">
                       {formatPriceByLang(costs.threeYearOngoingCost, language)}
                     </span>
                   </div>

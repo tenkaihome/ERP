@@ -48,7 +48,7 @@ export default function ComparisonTable() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border border-indigo-100 dark:border-indigo-900/30">
+          <span className="inline-block bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border border-indigo-100 dark:border-indigo-900/30">
             {t.compBadge}
           </span>
           <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white sm:text-4xl mt-4">

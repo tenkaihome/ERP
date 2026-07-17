@@ -23,7 +23,7 @@ export default function FaqSection() {
         
         {/* Section Header */}
         <div className="text-center space-y-4 mb-16">
-          <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-3 py-1.5 rounded-full border border-indigo-200/20">
+          <span className="inline-block mb-3 text-xs font-extrabold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-3 py-1.5 rounded-full border border-indigo-200/20">
             {t.faqClarifications}
           </span>
           <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white sm:text-4xl">
