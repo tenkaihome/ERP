@@ -146,6 +146,19 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
     sahoAddressText: "Tòa nhà SAHO, 120 Đường 3 Tháng 2, Quận 10, TP. Hồ Chí Minh",
     costDisclaimerTitle: "Tuyên bố miễn trừ trách nhiệm về Ước tính Chi phí:",
     costDisclaimerText: "Các số liệu chi phí bản quyền, triển khai, vận hành và TCO (Tổng chi phí sở hữu) 3 năm được cung cấp bởi Bộ tính toán trên trang web này mang tính chất ước lượng tham chiếu dựa trên nghiên cứu mặt bằng giá thị trường ERP 2025 - 2026. Chi phí thực tế sẽ phụ thuộc vào mức độ phức tạp của quy trình nghiệp vụ đặc thù, số lượng báo cáo tùy chỉnh, hiện trạng dữ liệu và kết quả khảo sát chi tiết (Blueprinting Workshop) của đội ngũ chuyên gia tư vấn SAHO ERP.",
+    
+    missionBadge: "TẦM NHÌN & SỨ MỆNH",
+    visionTitle: "TẦM NHÌN",
+    visionStatement: "Trở thành hệ sinh thái quản trị doanh nghiệp hàng đầu thế giới. Kiến tạo một thế giới nơi mọi doanh nghiệp đều có thể tiếp cận hệ thống quản trị đẳng cấp thế giới.",
+    missionTitle: "SỨ MỆNH",
+    missionStatement: "Đồng hành cùng doanh nghiệp xây dựng nền tảng quản trị hiện đại, chuẩn hóa vận hành và phát triển từ những bước khởi đầu đến quy mô toàn cầu.",
+    missionPillar1Title: "Quản Trị Hiện Đại",
+    missionPillar1Desc: "Xây dựng hệ thống quản trị tiên tiến, số hóa quy trình và tối ưu hóa tài nguyên doanh nghiệp.",
+    missionPillar2Title: "Chuẩn Hóa Vận Hành",
+    missionPillar2Desc: "Thiết lập quy trình chuẩn mực, loại bỏ lãng phí và tăng tốc độ xử lý công việc.",
+    missionPillar3Title: "Vươn Tầm Toàn Cầu",
+    missionPillar3Desc: "Hỗ trợ doanh nghiệp phát triển bền vững từ quy mô khởi nghiệp đến tầm quốc tế.",
+    
     pricingTiers: [
       {
         id: "starter",
@@ -497,6 +510,19 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
     sahoAddressText: "SAHO Tower, 120 3 Thang 2 St, District 10, Ho Chi Minh City, Vietnam",
     costDisclaimerTitle: "Cost Estimation Disclaimer:",
     costDisclaimerText: "The software license, implementation, support, and 3-year TCO (Total Cost of Ownership) figures provided by the calculator on this website are reference estimations based on the research of market ERP rates for 2025 - 2026. Actual costs will vary depending on specific business process complexity, custom reports, legacy data condition, and results of a detailed Blueprinting Workshop conducted by SAHO ERP specialists.",
+    
+    missionBadge: "VISION & MISSION",
+    visionTitle: "VISION",
+    visionStatement: "To become the world's leading enterprise management ecosystem. Creating a world where every business has access to world-class management systems.",
+    missionTitle: "MISSION",
+    missionStatement: "Accompanying businesses in building a modern management foundation, standardizing operations, and growing from initial steps to global scale.",
+    missionPillar1Title: "Modern Management",
+    missionPillar1Desc: "Building advanced management systems, digitizing processes, and optimizing enterprise resources.",
+    missionPillar2Title: "Standardized Operations",
+    missionPillar2Desc: "Establishing standard processes, eliminating wastes, and accelerating workflow execution.",
+    missionPillar3Title: "Global Scaling",
+    missionPillar3Desc: "Supporting sustainable growth for businesses, from startup scale to international heights.",
+    
     pricingTiers: [
       {
         id: "starter",
@@ -848,6 +874,19 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
     sahoAddressText: "Torre SAHO, Calle 3 de Febrero 120, Distrito 10, Ciudad Ho Chi Minh, Vietnam",
     costDisclaimerTitle: "Descargo de Responsabilidad de Estimación de Costos:",
     costDisclaimerText: "Las cifras de licencias de software, implementación, soporte y TCO (Costo Total de Propiedad) a 3 años proporcionadas por la calculadora en este sitio web son estimaciones de referencia basadas en la investigación de tarifas de ERP del mercado para 2025 - 2026. Los costos reales variarán según la complejidad específica del proceso comercial, informes personalizados, estado de los datos heredados y resultados de un taller de diseño detallado realizado por los especialistas de SAHO ERP.",
+    
+    missionBadge: "VISIÓN Y MISIÓN",
+    visionTitle: "VISIÓN",
+    visionStatement: "Convertirse en el ecosistema de gestión empresarial líder en el mundo. Creando un mundo donde cada empresa tenga acceso a sistemas de gestión de clase mundial.",
+    missionTitle: "MISIÓN",
+    missionStatement: "Acompañar a las empresas en la construcción de una base de gestión moderna, la estandarización de operaciones y el crecimiento desde los primeros pasos hasta la escala global.",
+    missionPillar1Title: "Gestión Moderna",
+    missionPillar1Desc: "Creación de sistemas de gestión avanzados, digitalización de procesos y optimización de recursos empresariales.",
+    missionPillar2Title: "Operaciones Estandarizadas",
+    missionPillar2Desc: "Establecer procesos estándar, eliminar desperdicios y acelerar la ejecución del flujo de trabajo.",
+    missionPillar3Title: "Escala Global",
+    missionPillar3Desc: "Apoyar el crecimiento sostenible de las empresas, desde la escala de startup hasta alturas internacionales.",
+    
     pricingTiers: [
       {
         id: "starter",
@@ -1199,6 +1238,19 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
     sahoAddressText: "SAHOタワー, 3月2日通り120号, 10区, ホーチミン市, ベトナム",
     costDisclaimerTitle: "コスト見積もり免責事項：",
     costDisclaimerText: "本ウェブサイト上のシミュレーターによって提供されるソフトウェアライセンス、導入、サポート、および3年間のTCO（総所有コスト）の数値は、2025〜2026年の市場ERPレートの調査に基づく参照予測です。実際のコストは、特定の業務プロセスの複雑さ、カスタムレポート、レガシーデータの状態、およびSAHO ERPスペシャリストが実施する詳細なブループレンティングワークショップの結果によって異なります。",
+    
+    missionBadge: "ビジョン ＆ ミッション",
+    visionTitle: "ビジョン",
+    visionStatement: "世界をリードする企業管理エコシステムになること。すべての企業が世界クラスの管理システムにアクセスできる世界を創造すること。",
+    missionTitle: "ミッション",
+    missionStatement: "企業の現代的な管理基盤の構築、業務の標準化、および初期のステップからグローバル規模への成長をサポートすること。",
+    missionPillar1Title: "現代的な管理",
+    missionPillar1Desc: "高度な管理システムの構築、プロセスのデジタル化、および企業リソースの最適化。",
+    missionPillar2Title: "標準化された業務",
+    missionPillar2Desc: "標準プロセスの確立、無駄の排除、およびワークフロー実行 của 高速化。",
+    missionPillar3Title: "グローバル成長",
+    missionPillar3Desc: "スタートアップ規模から国際的なレベルまで、企業の持続可能な成長をサポート。",
+    
     pricingTiers: [
       {
         id: "starter",

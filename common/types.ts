@@ -188,6 +188,18 @@ export interface LanguagePack {
   costDisclaimerTitle: string;
   costDisclaimerText: string;
 
+  missionBadge: string;
+  visionTitle: string;
+  visionStatement: string;
+  missionTitle: string;
+  missionStatement: string;
+  missionPillar1Title: string;
+  missionPillar1Desc: string;
+  missionPillar2Title: string;
+  missionPillar2Desc: string;
+  missionPillar3Title: string;
+  missionPillar3Desc: string;
+
   pricingTiers: PricingTier[];
   industries: Industry[];
   faqs: FAQ[];

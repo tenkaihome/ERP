@@ -2,6 +2,7 @@ import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
+import MissionSection from "@/components/MissionSection";
 import InteractiveCalculator from "@/components/InteractiveCalculator";
 import PricingTiers from "@/components/PricingTiers";
 import ComparisonTable from "@/components/ComparisonTable";
@@ -19,6 +20,9 @@ export default function Home() {
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
         {/* Hero Banner Section */}
         <HeroSection />
+
+        {/* Vision & Mission Statement Section */}
+        <MissionSection />
 
         {/* Pricing Slider & Dynamic TCO Estimator */}
         <InteractiveCalculator />
