@@ -24,9 +24,22 @@ export default function CustomSelect({
   placeholder = "Chọn một tùy chọn",
 }: CustomSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const selectedOption = options.find((opt) => opt.value === value);
+
+  // Handle open/close animations
+  useEffect(() => {
+    if (isOpen) {
+      setShouldRender(true);
+    } else {
+      const timer = setTimeout(() => {
+        setShouldRender(false);
+      }, 250); // 250ms matches the duration of animate-dropdown-unbounce
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -64,10 +77,12 @@ export default function CustomSelect({
       </button>
 
       {/* Options Dropdown List */}
-      {isOpen && (
+      {shouldRender && (
         <div
           data-lenis-prevent
-          className="absolute z-30 w-full mt-2 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl max-h-60 overflow-y-auto custom-scrollbar animate-fade-in divide-y divide-zinc-100 dark:divide-zinc-850"
+          className={`absolute z-30 w-full mt-2 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl max-h-60 overflow-y-auto custom-scrollbar origin-top divide-y divide-zinc-100 dark:divide-zinc-850 ${
+            isOpen ? "animate-dropdown-bounce" : "animate-dropdown-unbounce"
+          }`}
         >
           <div className="py-1.5">
             {options.map((option) => {

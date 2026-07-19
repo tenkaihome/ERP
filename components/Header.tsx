@@ -10,8 +10,21 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+  const [shouldRenderLang, setShouldRenderLang] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [theme, setTheme] = useState("light");
+
+  // Handle language dropdown exit animation
+  useEffect(() => {
+    if (isLangDropdownOpen) {
+      setShouldRenderLang(true);
+    } else {
+      const timer = setTimeout(() => {
+        setShouldRenderLang(false);
+      }, 250); // 250ms matches the 0.25s duration of animate-dropdown-unbounce
+      return () => clearTimeout(timer);
+    }
+  }, [isLangDropdownOpen]);
   const { language, setLanguage } = useLanguage();
   const pathname = usePathname();
   const router = useRouter();
@@ -233,8 +246,10 @@ export default function Header() {
               </button>
 
               {/* Dropdown Options */}
-              {isLangDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-36 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-1.5 shadow-xl flex flex-col gap-0.5 z-50 animate-fade-in">
+              {shouldRenderLang && (
+                <div className={`absolute right-0 mt-2 w-36 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-1.5 shadow-xl flex flex-col gap-0.5 z-50 origin-top-right ${
+                  isLangDropdownOpen ? "animate-dropdown-bounce" : "animate-dropdown-unbounce"
+                }`}>
                   {supportedLanguages.map((lang) => (
                     <button
                       key={lang.code}
@@ -288,8 +303,10 @@ export default function Header() {
               </button>
 
               {/* Dropdown Options */}
-              {isLangDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-32 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-1.5 shadow-xl flex flex-col gap-0.5 z-50 animate-fade-in">
+              {shouldRenderLang && (
+                <div className={`absolute right-0 mt-2 w-32 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-1.5 shadow-xl flex flex-col gap-0.5 z-50 origin-top-right ${
+                  isLangDropdownOpen ? "animate-dropdown-bounce" : "animate-dropdown-unbounce"
+                }`}>
                   {supportedLanguages.map((lang) => (
                     <button
                       key={lang.code}

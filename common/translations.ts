@@ -74,7 +74,7 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
 
     compBadge: "SO SÁNH BẢNG GIÁ & TÍNH NĂNG",
     compTitle: "Saho ERP vs Phần Mềm Khác",
-    compDesc: "Sở hữu các tính năng nghiệp vụ quy chuẩn quốc tế sánh ngang Odoo, NetSuite, SAP nhưng được tối ưu hóa đặc biệt và bản địa hóa hoàn hảo cho thị trường Việt Nam.",
+    compDesc: "Sở hữu các tính năng nghiệp vụ quy chuẩn quốc tế sánh ngang Odoo, NetSuite, SAP nhưng được tối ưu hóa đặc biệt và bản địa hóa cho đa thị trường toàn cầu như Việt Nam, Mỹ, Nhật,...",
     compColFeature: "Tính Năng / Đặc Điểm",
     compColOptimal: "Lựa chọn tối ưu",
     compMobileSwipe: "👉 Vuốt ngang màn hình để xem đầy đủ bảng so sánh",
@@ -438,7 +438,7 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
 
     compBadge: "PRICING & FEATURES MATRIX",
     compTitle: "Saho ERP vs The Rest",
-    compDesc: "Possesses international standard business features matching Odoo, NetSuite, and SAP, but specifically optimized and perfectly localized for the Vietnamese market.",
+    compDesc: "Possesses international standard business features matching Odoo, NetSuite, and SAP, but specifically optimized and localized for global multi-markets such as Vietnam, the US, Japan, etc.",
     compColFeature: "Feature / Characteristic",
     compColOptimal: "Optimal choice",
     compMobileSwipe: "👉 Swipe horizontally to view full comparison table",
@@ -802,7 +802,7 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
 
     compBadge: "MATRIZ DE PRECIOS Y CARACTERÍSTICAS",
     compTitle: "Saho ERP vs El Resto",
-    compDesc: "Posee características comerciales estándar internacionales que igualan a Odoo, NetSuite y SAP, pero optimizadas y perfectamente localizadas para el mercado de Vietnam.",
+    compDesc: "Posee características comerciales estándar internacionales que igualan a Odoo, NetSuite y SAP, pero optimizadas y localizadas para múltiples mercados globales como Vietnam, EE. UU., Japón, etc.",
     compColFeature: "Característica / Particularidad",
     compColOptimal: "Opción óptima",
     compMobileSwipe: "👉 Deslice horizontalmente para ver la tabla de comparación completa",
@@ -1166,7 +1166,7 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
 
     compBadge: "価格・機能比較マトリクス",
     compTitle: "Saho ERP と他社製品の比較",
-    compDesc: "Odoo、NetSuite、SAPに匹敵する国際基準 of 業務機能を備え、ベトナム市場向けに特別に最適化・ローカライズされています。",
+    compDesc: "Odoo、NetSuite、SAPに匹敵する国際基準 of 業務機能を備え、ベトナム、米国、日本などのグローバルマルチ市場向けに特別に最適化・ローカライズされています。",
     compColFeature: "機能 / 特徴",
     compColOptimal: "最適な選択肢",
     compMobileSwipe: "👉 横にスワイプして比較表全体を表示",
