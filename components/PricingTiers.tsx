@@ -23,7 +23,20 @@ export default function PricingTiers() {
     return formatPriceByLang(value, language, true);
   };
 
+  const triggerHaptic = (pattern: number | number[] = 18) => {
+    if (typeof window !== "undefined" && "vibrate" in navigator) {
+      try {
+        navigator.vibrate(pattern);
+      } catch {
+        // Ignore
+      }
+    }
+  };
+
   const handleOpenModal = (tier: PricingTier, event: React.MouseEvent<HTMLElement>) => {
+    if (typeof window !== "undefined" && window.innerWidth < 640) {
+      triggerHaptic(18);
+    }
     const cardEl = (event.currentTarget.closest(".tier-card") || event.currentTarget) as HTMLElement;
     if (cardEl) {
       const rect = cardEl.getBoundingClientRect();

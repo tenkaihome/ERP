@@ -359,7 +359,8 @@ export default function TierDetailModal({
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
             onPointerCancel={handlePointerCancel}
-            className={`pt-3 pb-4 px-4 text-white shadow-md relative shrink-0 ${headerGradient}`}
+            style={{ touchAction: "none" }}
+            className={`pt-3 pb-4 px-4 text-white shadow-md relative shrink-0 ${headerGradient} select-none`}
           >
             <div className="w-12 h-1 bg-white/40 hover:bg-white/60 rounded-full mx-auto mb-3 cursor-grab active:cursor-grabbing" />
             <div className="flex items-start justify-between gap-2.5">
