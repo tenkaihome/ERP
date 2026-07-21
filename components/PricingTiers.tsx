@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useMemo, useRef } from "react";
-import { Check, ArrowRight, ShieldCheck, Zap, Globe, Sparkles, Eye, Layers } from "lucide-react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
+import { Check, ArrowRight, ShieldCheck, Zap, Globe, Sparkles, Eye, Layers, ChevronLeft, ChevronRight } from "lucide-react";
 import { getPricingTiers, PricingTier } from "../common/constants";
 import { useLanguage } from "@/components/LanguageProvider";
 import { TRANSLATIONS } from "@/common/translations";
@@ -18,6 +18,16 @@ export default function PricingTiers() {
 
   const carouselRef = useRef<HTMLDivElement>(null);
   const pricingTiers = useMemo(() => getPricingTiers(language), [language]);
+
+  // Auto-scroll to Tier 2 (Growth) on mobile viewport on mount
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 640) {
+      const timer = setTimeout(() => {
+        scrollToCard(1);
+      }, 600); // Wait for hydration and layout paint
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const formatPrice = (value: number) => {
     return formatPriceByLang(value, language, true);
@@ -292,19 +302,47 @@ export default function PricingTiers() {
         </div>
 
         {/* Mobile Dynamic Indicator Dots (Clickable & Active State) */}
-        <div className="flex md:hidden items-center justify-center gap-2.5 mt-3">
-          {pricingTiers.map((t, idx) => (
+        <div className="flex md:hidden flex-col items-center justify-center gap-2 mt-4 select-none">
+          {/* Swipe Left/Right Hint */}
+          <div className="text-[10px] font-black text-slate-400 dark:text-zinc-500 uppercase tracking-widest flex items-center gap-1.5 animate-pulse">
+            <span>{t.swipeToCompare || "← Vuốt sang trái / phải để so sánh →"}</span>
+          </div>
+
+          <div className="flex items-center gap-4">
+            {/* Left navigation arrow */}
             <button
-              key={t.id}
-              onClick={() => scrollToCard(idx)}
-              title={t.name}
-              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                activeCardIndex === idx
-                  ? "w-7 bg-indigo-600 dark:bg-indigo-400 shadow-sm"
-                  : "w-2.5 bg-slate-300 dark:bg-zinc-700 hover:bg-slate-400"
-              }`}
-            />
-          ))}
+              onClick={() => scrollToCard(Math.max(0, activeCardIndex - 1))}
+              disabled={activeCardIndex === 0}
+              className="p-2 rounded-full bg-slate-100 dark:bg-zinc-800 disabled:opacity-40 text-slate-650 dark:text-zinc-300 active:scale-95 transition-all shadow-xs border border-slate-200/50 dark:border-zinc-700/50 cursor-pointer"
+            >
+              <ChevronLeft className="w-3.5 h-3.5" />
+            </button>
+
+            {/* Pagination dots */}
+            <div className="flex items-center gap-2">
+              {pricingTiers.map((t, idx) => (
+                <button
+                  key={t.id}
+                  onClick={() => scrollToCard(idx)}
+                  title={t.name}
+                  className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    activeCardIndex === idx
+                      ? "w-7 bg-indigo-600 dark:bg-indigo-400 shadow-sm"
+                      : "w-2.5 bg-slate-300 dark:bg-zinc-700 hover:bg-slate-400"
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Right navigation arrow */}
+            <button
+              onClick={() => scrollToCard(Math.min(pricingTiers.length - 1, activeCardIndex + 1))}
+              disabled={activeCardIndex === pricingTiers.length - 1}
+              className="p-2 rounded-full bg-slate-100 dark:bg-zinc-800 disabled:opacity-40 text-slate-655 dark:text-zinc-300 active:scale-95 transition-all shadow-xs border border-slate-200/50 dark:border-zinc-700/50 cursor-pointer"
+            >
+              <ChevronRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
 
       </div>

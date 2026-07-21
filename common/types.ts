@@ -218,6 +218,7 @@ export interface LanguagePack {
   searchFeaturePlaceholder?: string;
   close?: string;
   selectThisPlan?: string;
+  swipeToCompare?: string;
 
   pricingTiers: PricingTier[];
   industries: Industry[];

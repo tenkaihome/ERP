@@ -165,6 +165,7 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
     searchFeaturePlaceholder: "Tìm kiếm phân hệ / tính năng (VD: Payroll, AI, Multi Currency...)",
     close: "Đóng",
     selectThisPlan: "Đăng ký tư vấn gói này",
+    swipeToCompare: "Vuốt sang trái / phải để so sánh",
 
     pricingTiers: [
       {
@@ -536,6 +537,7 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
     searchFeaturePlaceholder: "Search module / feature (e.g., Payroll, AI, WMS...)",
     close: "Close",
     selectThisPlan: "Consult for this Plan",
+    swipeToCompare: "Swipe left / right to compare",
 
     pricingTiers: [
       {
@@ -907,6 +909,7 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
     searchFeaturePlaceholder: "Buscar módulo / función (ej. Nómina, IA...)",
     close: "Cerrar",
     selectThisPlan: "Consultar para este plan",
+    swipeToCompare: "Desliza a la izquierda / derecha",
 
     pricingTiers: [
       {
@@ -1278,6 +1281,7 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
     searchFeaturePlaceholder: "機能・モジュールを検索（例: 給与計算、AI...）",
     close: "閉じる",
     selectThisPlan: "このプランで相談する",
+    swipeToCompare: "左右にスワイプして比較",
 
     pricingTiers: [
       {
