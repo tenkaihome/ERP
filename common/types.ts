@@ -1,3 +1,13 @@
+export interface TierFeatureItem {
+  name: string;
+  desc?: string;
+}
+
+export interface TierFeatureCategory {
+  categoryName: string;
+  items: (string | TierFeatureItem)[];
+}
+
 export interface PricingTier {
   id: string;
   name: string;
@@ -12,7 +22,9 @@ export interface PricingTier {
   maxUsers: number;
   targetDescription: string;
   targetDetails: string[];
-  features: string[];
+  features: string[]; // Concise summary features
+  inheritsText?: string; // e.g. "Bao gồm toàn bộ Tier 1 +"
+  detailedCategories?: TierFeatureCategory[];
   referenceSystems: string;
   popular?: boolean;
 }
@@ -199,6 +211,13 @@ export interface LanguagePack {
   missionPillar2Desc: string;
   missionPillar3Title: string;
   missionPillar3Desc: string;
+
+  viewTierDetails?: string;
+  tierDetailsModalTitle?: string;
+  includesAllFrom?: string;
+  searchFeaturePlaceholder?: string;
+  close?: string;
+  selectThisPlan?: string;
 
   pricingTiers: PricingTier[];
   industries: Industry[];

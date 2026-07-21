@@ -1,20 +1,38 @@
 "use client";
 
-import React, { useMemo } from "react";
-import { Check, ArrowRight, ShieldCheck, Zap, Globe, Sparkles } from "lucide-react";
+import React, { useState, useMemo } from "react";
+import { Check, ArrowRight, ShieldCheck, Zap, Globe, Sparkles, Eye, Layers } from "lucide-react";
 import { getPricingTiers, PricingTier } from "../common/constants";
 import { useLanguage } from "@/components/LanguageProvider";
 import { TRANSLATIONS } from "@/common/translations";
 import { formatPriceByLang } from "../common/utils";
+import TierDetailModal from "./TierDetailModal";
 
 export default function PricingTiers() {
   const { language } = useLanguage();
-  const t = TRANSLATIONS[language];
+  const t = TRANSLATIONS[language] || TRANSLATIONS["vi"];
+
+  const [selectedModalTier, setSelectedModalTier] = useState<PricingTier | null>(null);
+  const [originRect, setOriginRect] = useState<{ top: number; left: number; width: number; height: number } | null>(null);
 
   const pricingTiers = useMemo(() => getPricingTiers(language), [language]);
 
   const formatPrice = (value: number) => {
     return formatPriceByLang(value, language, true);
+  };
+
+  const handleOpenModal = (tier: PricingTier, event: React.MouseEvent<HTMLElement>) => {
+    const cardEl = (event.currentTarget.closest(".tier-card") || event.currentTarget) as HTMLElement;
+    if (cardEl) {
+      const rect = cardEl.getBoundingClientRect();
+      setOriginRect({
+        top: rect.top,
+        left: rect.left,
+        width: rect.width,
+        height: rect.height,
+      });
+    }
+    setSelectedModalTier(tier);
   };
 
   const handleSelectPlan = (tierId: string) => {
@@ -56,8 +74,7 @@ export default function PricingTiers() {
               {t.pricingDesc}
             </p>
           </div>
-          
-          </div>
+        </div>
 
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
@@ -66,7 +83,8 @@ export default function PricingTiers() {
             return (
               <div
                 key={tier.id}
-                className={`flex flex-col rounded-3xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1.5 ${
+                onClick={(e) => handleOpenModal(tier, e)}
+                className={`tier-card flex flex-col rounded-3xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1.5 cursor-pointer ${
                   isPopular
                     ? "glow-card-popular bg-gradient-to-b from-indigo-950 via-zinc-900 to-zinc-950 text-white relative border border-indigo-900/50 shadow-xl"
                     : "glass-card text-zinc-900 dark:text-white"
@@ -142,12 +160,27 @@ export default function PricingTiers() {
 
                   <hr className={`my-6 ${isPopular ? "border-indigo-900/40" : "border-zinc-200/60 dark:border-zinc-800/60"}`} />
 
-                  {/* Core Features */}
+                  {/* Core Features Summary */}
                   <div className="space-y-4">
-                    <div className={`text-xs font-bold uppercase tracking-wider ${isPopular ? "text-amber-400" : "text-zinc-400"}`}>
-                      {t.pricingFeatures}
+                    <div className="space-y-2">
+                      <div className={`text-xs font-bold uppercase tracking-wider ${isPopular ? "text-amber-400" : "text-zinc-400"}`}>
+                        {t.pricingFeatures}
+                      </div>
+                      {tier.inheritsText && (
+                        <div>
+                          <span className={`inline-flex items-center gap-1.5 text-[11px] font-extrabold px-2.5 py-1 rounded-lg border ${
+                            isPopular
+                              ? "bg-indigo-950/90 text-indigo-300 border-indigo-700/60 shadow-sm"
+                              : "bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800"
+                          }`}>
+                            <Layers className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
+                            <span>{tier.inheritsText}</span>
+                          </span>
+                        </div>
+                      )}
                     </div>
-                    <ul className="space-y-3.5">
+
+                    <ul className="space-y-3.5 mb-6">
                       {tier.features.map((feature, idx) => (
                         <li key={idx} className={`flex items-start gap-2.5 text-sm leading-tight ${isPopular ? "text-zinc-200" : "text-zinc-700 dark:text-zinc-200"}`}>
                           <ShieldCheck className={`w-4 h-4 shrink-0 mt-0.5 ${
@@ -159,6 +192,23 @@ export default function PricingTiers() {
                         </li>
                       ))}
                     </ul>
+
+                    {/* View Detailed Features Button */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOpenModal(tier, e);
+                      }}
+                      className={`w-full py-3 px-4 rounded-2xl text-xs font-extrabold flex items-center justify-center gap-2 transition-all cursor-pointer border ${
+                        isPopular
+                          ? "bg-indigo-950/80 hover:bg-indigo-900 text-indigo-200 border-indigo-700/60 shadow-inner"
+                          : "bg-indigo-50 hover:bg-indigo-100 text-indigo-600 dark:bg-indigo-950/50 dark:hover:bg-indigo-900/60 dark:text-indigo-300 border-indigo-200/80 dark:border-indigo-800/80"
+                      }`}
+                    >
+                      <Eye className="w-4 h-4" />
+                      <span>{t.viewTierDetails || "Xem chi tiết tất cả tính năng"}</span>
+                    </button>
                   </div>
                 </div>
 
@@ -174,7 +224,10 @@ export default function PricingTiers() {
                   </div>
                   
                   <button
-                    onClick={() => handleSelectPlan(tier.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSelectPlan(tier.id);
+                    }}
                     className={`w-full inline-flex items-center justify-center gap-1.5 font-bold px-5 py-3.5 rounded-2xl transition-all duration-300 group cursor-pointer ${
                       isPopular
                         ? "bg-amber-500 hover:bg-amber-400 text-zinc-950 shadow-lg shadow-amber-500/10 hover:shadow-amber-500/25"
@@ -191,6 +244,16 @@ export default function PricingTiers() {
         </div>
 
       </div>
+
+      {/* Detail Modal Component */}
+      <TierDetailModal
+        isOpen={!!selectedModalTier}
+        tier={selectedModalTier}
+        allTiers={pricingTiers}
+        originRect={originRect}
+        onClose={() => setSelectedModalTier(null)}
+        onSelectPlan={handleSelectPlan}
+      />
     </section>
   );
 }

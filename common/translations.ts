@@ -159,6 +159,13 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
     missionPillar3Title: "Vươn Tầm Toàn Cầu",
     missionPillar3Desc: "Hỗ trợ doanh nghiệp phát triển bền vững từ quy mô khởi nghiệp đến tầm quốc tế.",
     
+    viewTierDetails: "Xem chi tiết tính năng",
+    tierDetailsModalTitle: "Chi tiết các dịch vụ & phân hệ",
+    includesAllFrom: "Bao gồm toàn bộ tính năng của",
+    searchFeaturePlaceholder: "Tìm kiếm phân hệ / tính năng (VD: Payroll, AI, Multi Currency...)",
+    close: "Đóng",
+    selectThisPlan: "Đăng ký tư vấn gói này",
+
     pricingTiers: [
       {
         id: "starter",
@@ -523,6 +530,13 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
     missionPillar3Title: "Global Scaling",
     missionPillar3Desc: "Supporting sustainable growth for businesses, from startup scale to international heights.",
     
+    viewTierDetails: "View Detailed Features",
+    tierDetailsModalTitle: "Detailed Services & Modules",
+    includesAllFrom: "Includes all features from",
+    searchFeaturePlaceholder: "Search module / feature (e.g., Payroll, AI, WMS...)",
+    close: "Close",
+    selectThisPlan: "Consult for this Plan",
+
     pricingTiers: [
       {
         id: "starter",
@@ -887,6 +901,13 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
     missionPillar3Title: "Escala Global",
     missionPillar3Desc: "Apoyar el crecimiento sostenible de las empresas, desde la escala de startup hasta alturas internacionales.",
     
+    viewTierDetails: "Ver detalles de funciones",
+    tierDetailsModalTitle: "Servicios y Módulos Detallados",
+    includesAllFrom: "Incluye todas las funciones de",
+    searchFeaturePlaceholder: "Buscar módulo / función (ej. Nómina, IA...)",
+    close: "Cerrar",
+    selectThisPlan: "Consultar para este plan",
+
     pricingTiers: [
       {
         id: "starter",
@@ -1251,6 +1272,13 @@ export const TRANSLATIONS: Record<string, LanguagePack> = {
     missionPillar3Title: "グローバル成長",
     missionPillar3Desc: "スタートアップ規模から国際的なレベルまで、企業の持続可能な成長をサポート。",
     
+    viewTierDetails: "詳細機能をみる",
+    tierDetailsModalTitle: "提供機能・モジュール一覧",
+    includesAllFrom: "以下のすべての機能を含みます：",
+    searchFeaturePlaceholder: "機能・モジュールを検索（例: 給与計算、AI...）",
+    close: "閉じる",
+    selectThisPlan: "このプランで相談する",
+
     pricingTiers: [
       {
         id: "starter",
