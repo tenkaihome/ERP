@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import { Check, ArrowRight, ShieldCheck, Zap, Globe, Sparkles, Eye, Layers } from "lucide-react";
 import { getPricingTiers, PricingTier } from "../common/constants";
 import { useLanguage } from "@/components/LanguageProvider";
@@ -14,7 +14,9 @@ export default function PricingTiers() {
 
   const [selectedModalTier, setSelectedModalTier] = useState<PricingTier | null>(null);
   const [originRect, setOriginRect] = useState<{ top: number; left: number; width: number; height: number } | null>(null);
+  const [activeCardIndex, setActiveCardIndex] = useState(0);
 
+  const carouselRef = useRef<HTMLDivElement>(null);
   const pricingTiers = useMemo(() => getPricingTiers(language), [language]);
 
   const formatPrice = (value: number) => {
@@ -54,6 +56,35 @@ export default function PricingTiers() {
     }
   };
 
+  // Track active scroll card index on mobile carousel
+  const handleCarouselScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const container = e.currentTarget;
+    const scrollLeft = container.scrollLeft;
+    const firstChild = container.firstElementChild as HTMLElement;
+    if (firstChild) {
+      const cardWidth = firstChild.offsetWidth;
+      const gap = 16; // 16px gap on mobile
+      const index = Math.round(scrollLeft / (cardWidth + gap));
+      setActiveCardIndex(Math.max(0, Math.min(index, pricingTiers.length - 1)));
+    }
+  };
+
+  const scrollToCard = (index: number) => {
+    if (carouselRef.current) {
+      const container = carouselRef.current;
+      const firstChild = container.firstElementChild as HTMLElement;
+      if (firstChild) {
+        const cardWidth = firstChild.offsetWidth;
+        const gap = 16;
+        container.scrollTo({
+          left: index * (cardWidth + gap),
+          behavior: "smooth",
+        });
+        setActiveCardIndex(index);
+      }
+    }
+  };
+
   const icons: Record<string, React.ReactNode> = {
     starter: <Zap className="w-5 h-5 text-indigo-500" />,
     growth: <Sparkles className="w-5 h-5 text-amber-400" />,
@@ -65,7 +96,7 @@ export default function PricingTiers() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
           <div className="max-w-2xl">
             <h2 className="text-3xl font-extrabold text-zinc-900 dark:text-white sm:text-4xl">
               {t.pricingTitle}
@@ -76,15 +107,19 @@ export default function PricingTiers() {
           </div>
         </div>
 
-        {/* Pricing Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+        {/* Pricing Cards Horizontal Carousel on Mobile (< md), Grid on Desktop (>= md) */}
+        <div
+          ref={carouselRef}
+          onScroll={handleCarouselScroll}
+          className="flex md:grid md:grid-cols-2 lg:grid-cols-3 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 pt-2 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 gap-4 sm:gap-6 md:gap-8 items-stretch no-scrollbar"
+        >
           {pricingTiers.map((tier) => {
             const isPopular = tier.popular;
             return (
               <div
                 key={tier.id}
                 onClick={(e) => handleOpenModal(tier, e)}
-                className={`tier-card flex flex-col rounded-3xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1.5 cursor-pointer ${
+                className={`tier-card w-[86vw] max-w-[340px] sm:w-[360px] md:w-auto shrink-0 snap-center flex flex-col rounded-3xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1.5 cursor-pointer ${
                   isPopular
                     ? "glow-card-popular bg-gradient-to-b from-indigo-950 via-zinc-900 to-zinc-950 text-white relative border border-indigo-900/50 shadow-xl"
                     : "glass-card text-zinc-900 dark:text-white"
@@ -241,6 +276,22 @@ export default function PricingTiers() {
               </div>
             );
           })}
+        </div>
+
+        {/* Mobile Dynamic Indicator Dots (Clickable & Active State) */}
+        <div className="flex md:hidden items-center justify-center gap-2.5 mt-3">
+          {pricingTiers.map((t, idx) => (
+            <button
+              key={t.id}
+              onClick={() => scrollToCard(idx)}
+              title={t.name}
+              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                activeCardIndex === idx
+                  ? "w-7 bg-indigo-600 dark:bg-indigo-400 shadow-sm"
+                  : "w-2.5 bg-slate-300 dark:bg-zinc-700 hover:bg-slate-400"
+              }`}
+            />
+          ))}
         </div>
 
       </div>
